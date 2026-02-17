@@ -1,6 +1,6 @@
 package fr.gerome.cleanarchitecture.infrastructure.restendpoints;
 
-import fr.gerome.cleanarchitecture.domain.usecases.CreateAnAuthor;
+import fr.gerome.cleanarchitecture.domain.usecases.AnAdministratorCreatesAnAuthor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
@@ -18,14 +18,14 @@ class AuthorControllerTest {
     private RestTestClient restTestClient;
 
     @MockitoBean
-    private CreateAnAuthor createAnAuthor;
+    private AnAdministratorCreatesAnAuthor anAdministratorCreatesAnAuthor;
 
     @Test
     void greetingShouldReturnMessageFromService() {
         restTestClient.post().uri("/authors").exchange()
                 .expectBody(String.class)
                 .isEqualTo("ok");
-        verify(createAnAuthor).execute();
+        verify(anAdministratorCreatesAnAuthor).execute();
     }
 
 }

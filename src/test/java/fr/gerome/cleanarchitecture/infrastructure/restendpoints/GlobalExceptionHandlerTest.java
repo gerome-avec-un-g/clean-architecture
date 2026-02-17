@@ -1,6 +1,6 @@
 package fr.gerome.cleanarchitecture.infrastructure.restendpoints;
 
-import fr.gerome.cleanarchitecture.domain.usecases.CreateAnAuthor;
+import fr.gerome.cleanarchitecture.domain.usecases.AnAdministratorCreatesAnAuthor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
@@ -23,11 +23,11 @@ class GlobalExceptionHandlerTest {
     private RestTestClient restTestClient;
 
     @MockitoBean
-    private CreateAnAuthor createAnAuthor;
+    private AnAdministratorCreatesAnAuthor anAdministratorCreatesAnAuthor;
 
     @Test
     void greetingShouldReturnMessageFromService() {
-        doThrow(new IllegalArgumentException("argument invalid")).when(createAnAuthor).execute();
+        doThrow(new IllegalArgumentException("argument invalid")).when(anAdministratorCreatesAnAuthor).execute();
         ProblemDetail expected = ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR, "argument invalid");
         expected.setInstance(URI.create("/authors"));
 

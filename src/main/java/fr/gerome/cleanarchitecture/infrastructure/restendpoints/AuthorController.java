@@ -1,6 +1,6 @@
 package fr.gerome.cleanarchitecture.infrastructure.restendpoints;
 
-import fr.gerome.cleanarchitecture.domain.usecases.CreateAnAuthor;
+import fr.gerome.cleanarchitecture.domain.usecases.AnAdministratorCreatesAnAuthor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,15 +9,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/authors")
 public class AuthorController {
 
-    private final CreateAnAuthor createAnAuthor;
+    private final AnAdministratorCreatesAnAuthor anAdministratorCreatesAnAuthor;
 
-    public AuthorController(CreateAnAuthor createAnAuthor) {
-        this.createAnAuthor = createAnAuthor;
+    public AuthorController(AnAdministratorCreatesAnAuthor anAdministratorCreatesAnAuthor) {
+        this.anAdministratorCreatesAnAuthor = anAdministratorCreatesAnAuthor;
     }
 
     @PostMapping
     public String createAnAuthor() {
-        createAnAuthor.execute();
+        anAdministratorCreatesAnAuthor.execute();
         return "ok";
     }
 
