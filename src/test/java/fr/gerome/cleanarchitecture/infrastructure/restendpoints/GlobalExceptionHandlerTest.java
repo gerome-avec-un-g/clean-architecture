@@ -8,11 +8,11 @@ import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.client.RestTestClient;
 
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.doThrow;
 
 @WebMvcTest(AuthorController.class)
 @AutoConfigureRestTestClient
-class AuthorControllerTest {
+class GlobalExceptionHandlerTest {
 
     @Autowired
     private RestTestClient restTestClient;
@@ -22,10 +22,18 @@ class AuthorControllerTest {
 
     @Test
     void greetingShouldReturnMessageFromService() {
+        doThrow(new IllegalArgumentException("argument invalid")).when(createAnAuthor).execute();
         restTestClient.post().uri("/authors").exchange()
                 .expectBody(String.class)
-                .isEqualTo("ok");
-        verify(createAnAuthor).execute();
+                .isEqualTo("""
+                        {
+                          "detail": "argument invalid",
+                          "instance": "/authors",
+                          "status": 500,
+                          "title": "Internal Server Error"
+                        }""".replace("\n","")
+                        .replace(": ",":")
+                        .replace("  ",""));
     }
 
 }
