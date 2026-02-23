@@ -12,6 +12,11 @@ Run
 mvn spring-boot:run
 ```
 
+```
+http://localhost:8080/swagger-ui.html
+http://localhost:8080/v3/api-docs
+```
+
 ## Architecture
 ```mermaid
 ---
@@ -32,8 +37,25 @@ flowchart LR
     boundedContext1(bounded context 1)
     boundedContext2(bounded context 2)
     restEndpoint(rest endpoint)
-    persistence(persistence)
+    persistence[(persistence)]
     restClient(rest client)
+    subgraph infrastructure
+        restEndpoint
+        persistence
+        restClient
+        subgraph application
+            restEndpoint
+        end
+        subgraph 3rd-party
+            persistence
+            restClient
+        end
+    end
+    subgraph domain
+        useCases
+        boundedContext1
+        boundedContext2
+    end
     restEndpoint --> useCases
     useCases --> boundedContext1
     useCases --> boundedContext2
