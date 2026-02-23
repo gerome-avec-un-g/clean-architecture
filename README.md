@@ -15,6 +15,8 @@ mvn spring-boot:run
 ```
 http://localhost:8080/swagger-ui.html
 http://localhost:8080/v3/api-docs
+http://localhost:8080/actuator
+http://localhost:8080/actuator/metrics/application.started.time
 ```
 
 ## Architecture
