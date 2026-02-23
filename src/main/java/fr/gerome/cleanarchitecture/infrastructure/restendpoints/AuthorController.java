@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -19,9 +20,14 @@ public class AuthorController {
         this.anAdministratorCreatesAnAuthor = anAdministratorCreatesAnAuthor;
     }
 
-    @GetMapping(path="/authors"/*, version = "1"*/)
+    @GetMapping(path="/{version}/authors", version = "1.0")
     public AllAuthorsResponse getAllAuthors() {
         return new AllAuthorsResponse(List.of(new AuthorResponse("John", "Doe")));
+    }
+
+    @GetMapping(path="/{version}/authors", version = "2.0")
+    public AllAuthorsResponseV2 getAllAuthorsV2() {
+        return new AllAuthorsResponseV2(List.of(new AuthorResponseV2("John", "Doe", LocalDate.of(1980,2,14))));
     }
 
     @PostMapping(path="/authors"/*, version = "1"*/)
