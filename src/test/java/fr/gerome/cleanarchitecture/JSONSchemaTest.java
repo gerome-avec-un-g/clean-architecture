@@ -43,8 +43,6 @@ public class JSONSchemaTest {
     }
 
     // TODO json-schema to json
-    // TODO json-schema to records/java
-    // TODO json-schema to swagger
     // TODO validation with json schema
 
     @Test
