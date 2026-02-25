@@ -50,7 +50,7 @@ public class JSONSchemaTest {
     // TODO validation with json schema
 
     @Test
-    public void givenInvalidInput_whenValidating_thenInvalid_deep() throws ValidationException, IOException {
+    public void givenInvalidInput_whenValidating_thenInvalid_deep() {
         SchemaRegistry schemaRegistry = SchemaRegistry.withDialect(Dialects.getDraft202012());
         Schema schema = schemaRegistry.getSchema(SchemaLocation.of("classpath:schema/taxpayer/taxpayer.json"));
         ExecutionConfig executionConfig = new ExecutionConfig.Builder().locale(Locale.ENGLISH).build();
@@ -66,7 +66,7 @@ public class JSONSchemaTest {
     }
 
     @Test
-    public void givenValidInput_whenValidating_thenValid_deep() throws ValidationException, IOException {
+    public void givenValidInput_whenValidating_thenValid_deep() {
         SchemaRegistry schemaRegistry = SchemaRegistry.withDialect(Dialects.getDraft202012());
         Schema schema = schemaRegistry.getSchema(SchemaLocation.of("classpath:schema/taxpayer/taxpayer.json"));
         ExecutionConfig executionConfig = new ExecutionConfig.Builder().locale(Locale.ENGLISH).build();
