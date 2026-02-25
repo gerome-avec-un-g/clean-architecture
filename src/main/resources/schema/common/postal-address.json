@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "common/postal-address.json",
+  "title": "PostalAddress (compatible ISO 20022)",
+  "schemaVersion": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "buildingNumber": {
+      "type": "string"
+    },
+    "buildingName": {
+      "type": "string"
+    },
+    "floor": {
+      "type": "string"
+    },
+    "room": {
+      "type": "string"
+    },
+    "streetName": {
+      "type": "string"
+    },
+    "postBox": {
+      "type": "string"
+    },
+    "postCode": {
+      "type": "string"
+    },
+    "townName": {
+      "type": "string"
+    },
+    "districtName": {
+      "type": "string"
+    },
+    "countrySubDivision": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string",
+      "pattern": "^[A-Z]{2}$"
+    },
+    "addressLine": {
+      "type": "array",
+      "maxItems": 2,
+      "items": {
+        "type": "string",
+        "maxLength": 70
+      }
+    }
+  }
+}

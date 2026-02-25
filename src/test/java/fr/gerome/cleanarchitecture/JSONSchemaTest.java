@@ -24,10 +24,10 @@ public class JSONSchemaTest {
 
     @Test
     public void givenInvalidInput_whenValidating_thenInvalid() throws IOException {
-        String v1 = mapper.readTree(
+        String schemaJson = mapper.readTree(
                 JSONSchemaTest.class.getResourceAsStream("/schema.json")).toString();
         SchemaRegistry schemaRegistry = SchemaRegistry.withDialect(Dialects.getDraft202012(),
-                builder -> builder.schemas(Map.of("/schema.json", v1)));
+                builder -> builder.schemas(Map.of("/schema.json", schemaJson)));
         Schema schema = schemaRegistry.getSchema(SchemaLocation.of("/schema.json"));
         ExecutionConfig executionConfig = new ExecutionConfig.Builder().locale(Locale.ENGLISH).build();
         JsonNode jsonNode = mapper.readTree(
@@ -38,11 +38,8 @@ public class JSONSchemaTest {
 
     @Test
     public void givenValidInput_whenValidating_thenValid() throws ValidationException, IOException {
-        String v1 = mapper.readTree(
-                JSONSchemaTest.class.getResourceAsStream("/schema.json")).toString();
-        SchemaRegistry schemaRegistry = SchemaRegistry.withDialect(Dialects.getDraft202012(),
-                builder -> builder.schemas(Map.of("/schema.json", v1)));
-        Schema schema = schemaRegistry.getSchema(SchemaLocation.of("/schema.json"));
+        SchemaRegistry schemaRegistry = SchemaRegistry.withDialect(Dialects.getDraft202012());
+        Schema schema = schemaRegistry.getSchema(SchemaLocation.of("classpath:schema.json"));
         ExecutionConfig executionConfig = new ExecutionConfig.Builder().locale(Locale.ENGLISH).build();
         JsonNode jsonNode = mapper.readTree(
                 JSONSchemaTest.class.getResourceAsStream("/product_valid.json"));
@@ -51,5 +48,17 @@ public class JSONSchemaTest {
     }
 
     // TODO deep schema with references
+
+    @Test
+    public void givenValidInput_whenValidating_thenValid_deep() throws ValidationException, IOException {
+        SchemaRegistry schemaRegistry = SchemaRegistry.withDialect(Dialects.getDraft202012());
+        //Schema schema = schemaRegistry.getSchema(SchemaLocation.of("schema/taxpayer/taxpayer.json"));
+        Schema schema = schemaRegistry.getSchema(SchemaLocation.of("classpath:schema/taxpayer/taxpayer.json"));
+        ExecutionConfig executionConfig = new ExecutionConfig.Builder().locale(Locale.ENGLISH).build();
+        JsonNode jsonNode = mapper.readTree(
+                JSONSchemaTest.class.getResourceAsStream("/taxpayer_valid.json"));
+        List<Error> errors = schema.validate(jsonNode, executionContext -> executionContext.setExecutionConfig(executionConfig));
+        assertThat(errors).isEmpty();
+    }
 
 }

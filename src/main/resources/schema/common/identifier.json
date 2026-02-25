@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "common/identifier.json",
+  "title": "Identifier",
+  "schemaVersion": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "value"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "FR_SPI",
+        "TIN",
+        "SSN",
+        "NINO",
+        "OTHER"
+      ]
+    },
+    "value": {
+      "type": "string",
+      "maxLength": 64
+    },
+    "issuerCountry": {
+      "type": "string",
+      "pattern": "^[A-Z]{2}$"
+    }
+  }
+}
