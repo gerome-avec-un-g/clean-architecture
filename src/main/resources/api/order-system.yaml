@@ -1,0 +1,22 @@
+openapi: 3.0.0
+info:
+  title: Exemple d'API
+  description: Une description multiligne qui accepte du **CommonMark**  !
+  version: 0.1.1
+servers:
+  - url: https://api.grafikart.fr/v1
+    description: Une description du serveur (optionnelle)
+paths:
+  /users:
+    get:
+      summary: Renvoie la liste des utilisateur.
+      description: Une description plus longue expliquant le principe
+      responses:
+        '200':
+          description: Un tableau contenant la liste des utilisateurs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
