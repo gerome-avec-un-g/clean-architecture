@@ -20,22 +20,22 @@ public class AuthorController {
         this.anAdministratorCreatesAnAuthor = anAdministratorCreatesAnAuthor;
     }
 
-    @GetMapping(path="/authors", version = "1.0")
+    @GetMapping(path="/authors"/*, version = "1.0"*/)
     public AllAuthorsResponse getAllAuthors() {
         return new AllAuthorsResponse(List.of(new AuthorResponse("John", "Doe")));
     }
 
-    @GetMapping(path="/authors", version = "1.1")
-    public AllAuthorsResponse getAllAuthorsV1_1() {
-        return new AllAuthorsResponse(List.of(new AuthorResponse("Jane", "Doe")));
-    }
+//    @GetMapping(path="/authors"/*, version = "1.1"*/)
+//    public AllAuthorsResponse getAllAuthorsV1_1() {
+//        return new AllAuthorsResponse(List.of(new AuthorResponse("Jane", "Doe")));
+//    }
 
-    @GetMapping(path="/authors", version = "2.0")
-    public AllAuthorsResponseV2 getAllAuthorsV2() {
-        return new AllAuthorsResponseV2(List.of(new AuthorResponseV2("John", "Doe", LocalDate.of(1980,2,14))));
-    }
+//    @GetMapping(path="/authors"/*, version = "2.0"*/)
+//    public AllAuthorsResponseV2 getAllAuthorsV2() {
+//        return new AllAuthorsResponseV2(List.of(new AuthorResponseV2("John", "Doe", LocalDate.of(1980,2,14))));
+//    }
 
-    @PostMapping(path="/authors", version = "1.0")
+    @PostMapping(path="/authors"/*, version = "1.0"*/)
     public String createAnAuthor(@RequestBody CreateAnAuthorRequest request) {
         anAdministratorCreatesAnAuthor.execute();
         return "ok";
