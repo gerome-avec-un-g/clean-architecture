@@ -151,8 +151,8 @@
                     <configuration>
                         <inputSpec>${project.basedir}/src/main/resources/api/order-system.yaml</inputSpec>
                         <generatorName>spring</generatorName>
-                        <apiPackage>com.example.api</apiPackage>
-                        <modelPackage>com.example.model</modelPackage>
+                        <apiPackage>fr.gerome.cleanarchitecture.infrastructure.restendpoints.api</apiPackage>
+                        <modelPackage>fr.gerome.cleanarchitecture.infrastructure.restendpoints.model</modelPackage>
                         <configOptions>
                             <interfaceOnly>true</interfaceOnly>
                             <useSpringBoot3>true</useSpringBoot3>
