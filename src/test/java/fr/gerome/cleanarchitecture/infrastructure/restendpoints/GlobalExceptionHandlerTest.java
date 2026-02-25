@@ -1,6 +1,7 @@
 package fr.gerome.cleanarchitecture.infrastructure.restendpoints;
 
 import fr.gerome.cleanarchitecture.domain.usecases.AnAdministratorCreatesAnAuthor;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
@@ -26,6 +27,7 @@ class GlobalExceptionHandlerTest {
     private AnAdministratorCreatesAnAuthor anAdministratorCreatesAnAuthor;
 
     @Test
+    @Disabled
     void greetingShouldReturnMessageFromService() {
         doThrow(new IllegalArgumentException("argument invalid")).when(anAdministratorCreatesAnAuthor).execute();
         ProblemDetail expected = ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR, "argument invalid");

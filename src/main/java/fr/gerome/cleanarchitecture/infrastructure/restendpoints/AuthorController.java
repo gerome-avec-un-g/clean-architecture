@@ -35,7 +35,7 @@ public class AuthorController {
         return new AllAuthorsResponseV2(List.of(new AuthorResponseV2("John", "Doe", LocalDate.of(1980,2,14))));
     }
 
-    @PostMapping(path="/authors"/*, version = "1"*/)
+    @PostMapping(path="/authors", version = "1.0")
     public String createAnAuthor(@RequestBody CreateAnAuthorRequest request) {
         anAdministratorCreatesAnAuthor.execute();
         return "ok";
