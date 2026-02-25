@@ -14,7 +14,7 @@ import tools.jackson.databind.json.JsonMapper;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
+import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -23,12 +23,9 @@ public class JSONSchemaTest {
     private final JsonMapper mapper = new JsonMapper();
 
     @Test
-    public void givenInvalidInput_whenValidating_thenInvalid() throws IOException {
-        String schemaJson = mapper.readTree(
-                JSONSchemaTest.class.getResourceAsStream("/schema.json")).toString();
-        SchemaRegistry schemaRegistry = SchemaRegistry.withDialect(Dialects.getDraft202012(),
-                builder -> builder.schemas(Map.of("/schema.json", schemaJson)));
-        Schema schema = schemaRegistry.getSchema(SchemaLocation.of("/schema.json"));
+    public void givenInvalidInput_whenValidating_thenInvalid() {
+        SchemaRegistry schemaRegistry = SchemaRegistry.withDialect(Dialects.getDraft202012());
+        Schema schema = schemaRegistry.getSchema(SchemaLocation.of("classpath:schema.json"));
         ExecutionConfig executionConfig = new ExecutionConfig.Builder().locale(Locale.ENGLISH).build();
         JsonNode jsonNode = mapper.readTree(
                 JSONSchemaTest.class.getResourceAsStream("/product_invalid.json"));
@@ -37,7 +34,7 @@ public class JSONSchemaTest {
     }
 
     @Test
-    public void givenValidInput_whenValidating_thenValid() throws ValidationException, IOException {
+    public void givenValidInput_whenValidating_thenValid() {
         SchemaRegistry schemaRegistry = SchemaRegistry.withDialect(Dialects.getDraft202012());
         Schema schema = schemaRegistry.getSchema(SchemaLocation.of("classpath:schema.json"));
         ExecutionConfig executionConfig = new ExecutionConfig.Builder().locale(Locale.ENGLISH).build();
@@ -47,12 +44,30 @@ public class JSONSchemaTest {
         assertThat(errors).isEmpty();
     }
 
-    // TODO deep schema with references
+    // TODO json-schema to json
+    // TODO json-schema to records/java
+    // TODO json-schema to swagger
+    // TODO validation with json schema
+
+    @Test
+    public void givenInvalidInput_whenValidating_thenInvalid_deep() throws ValidationException, IOException {
+        SchemaRegistry schemaRegistry = SchemaRegistry.withDialect(Dialects.getDraft202012());
+        Schema schema = schemaRegistry.getSchema(SchemaLocation.of("classpath:schema/taxpayer/taxpayer.json"));
+        ExecutionConfig executionConfig = new ExecutionConfig.Builder().locale(Locale.ENGLISH).build();
+        JsonNode jsonNode = mapper.readTree(
+                JSONSchemaTest.class.getResourceAsStream("/taxpayer_invalid.json"));
+        List<Error> errors = schema.validate(jsonNode, executionContext -> executionContext.setExecutionConfig(executionConfig));
+        assertThat(errors.stream().map(Objects::toString).toList()).isNotEmpty()
+                .contains("/naturalPerson/placeOfBirth/country: does not match the regex pattern ^[A-Z]{2}$",
+                        "/naturalPerson/nationalIdentifiers/0/type: does not have a value in the enumeration [\"FR_SPI\", \"TIN\", \"SSN\", \"NINO\", \"OTHER\"]",
+                        "/naturalPerson/nationalIdentifiers/0/issuerCountry: does not match the regex pattern ^[A-Z]{2}$",
+                        "/naturalPerson/postalAddress/country: does not match the regex pattern ^[A-Z]{2}$",
+                        "/household/maritalStatus: does not have a value in the enumeration [\"SINGLE\", \"MARRIED\", \"PACS\", \"DIVORCED\", \"WIDOWED\"]");
+    }
 
     @Test
     public void givenValidInput_whenValidating_thenValid_deep() throws ValidationException, IOException {
         SchemaRegistry schemaRegistry = SchemaRegistry.withDialect(Dialects.getDraft202012());
-        //Schema schema = schemaRegistry.getSchema(SchemaLocation.of("schema/taxpayer/taxpayer.json"));
         Schema schema = schemaRegistry.getSchema(SchemaLocation.of("classpath:schema/taxpayer/taxpayer.json"));
         ExecutionConfig executionConfig = new ExecutionConfig.Builder().locale(Locale.ENGLISH).build();
         JsonNode jsonNode = mapper.readTree(

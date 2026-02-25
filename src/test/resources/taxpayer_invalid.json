@@ -11,13 +11,13 @@
     "placeOfBirth": {
       "city": "sample string",
       "postalCode": "sample string",
-      "country": "FR"
+      "country": "sample string"
     },
     "nationalIdentifiers": [
       {
-        "type":"OTHER",
+        "type":"sample string",
         "value":"sample string",
-        "issuerCountry":"FR"
+        "issuerCountry":"sample string"
       }
     ],
     "postalAddress": {
@@ -31,7 +31,7 @@
       "townName": "John Doe",
       "districtName": "John Doe",
       "countrySubDivision": "sample string",
-      "country": "FR",
+      "country": "sample string",
       "addressLine": [
         "sample string",
         "sample string"
@@ -39,7 +39,7 @@
     }
   },
   "household": {
-    "maritalStatus": "PACS",
+    "maritalStatus": "sample string",
     "dependentsCount": 11
   }
 }
