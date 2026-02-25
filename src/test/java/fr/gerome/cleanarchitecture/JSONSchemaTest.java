@@ -1,48 +1,56 @@
 package fr.gerome.cleanarchitecture;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.networknt.schema.Error;
 import com.networknt.schema.ExecutionConfig;
-import com.networknt.schema.JsonSchema;
-import com.networknt.schema.JsonSchemaFactory;
-import com.networknt.schema.SpecVersion;
-import com.networknt.schema.ValidationMessage;
+import com.networknt.schema.Schema;
+import com.networknt.schema.SchemaLocation;
+import com.networknt.schema.SchemaRegistry;
+import com.networknt.schema.dialect.Dialects;
 import jakarta.validation.ValidationException;
 import org.junit.jupiter.api.Test;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.json.JsonMapper;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.List;
 import java.util.Locale;
-import java.util.Set;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class JSONSchemaTest {
 
-    private final ObjectMapper  mapper = new ObjectMapper();
+    private final JsonMapper mapper = new JsonMapper();
 
     @Test
     public void givenInvalidInput_whenValidating_thenInvalid() throws IOException {
-        JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V4);
-        JsonSchema jsonSchema = factory.getSchema(
-                JSONSchemaTest.class.getResourceAsStream("/schema.json"));
+        String v1 = mapper.readTree(
+                JSONSchemaTest.class.getResourceAsStream("/schema.json")).toString();
+        SchemaRegistry schemaRegistry = SchemaRegistry.withDialect(Dialects.getDraft202012(),
+                builder -> builder.schemas(Map.of("/schema.json", v1)));
+        Schema schema = schemaRegistry.getSchema(SchemaLocation.of("/schema.json"));
+        ExecutionConfig executionConfig = new ExecutionConfig.Builder().locale(Locale.ENGLISH).build();
         JsonNode jsonNode = mapper.readTree(
                 JSONSchemaTest.class.getResourceAsStream("/product_invalid.json"));
-            ExecutionConfig executionConfig = new ExecutionConfig();
-            executionConfig.setLocale(Locale.ENGLISH);
-        Set<ValidationMessage> errors = jsonSchema.validate(jsonNode,  executionContext -> {
-            executionContext.setExecutionConfig(executionConfig);
-        });
+        List<Error> errors = schema.validate(jsonNode, executionContext -> executionContext.setExecutionConfig(executionConfig));
         assertThat(errors).isNotEmpty().asString().contains("price: must have an exclusive minimum value of 0");
     }
 
     @Test
     public void givenValidInput_whenValidating_thenValid() throws ValidationException, IOException {
-        JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V4);
-        JsonSchema jsonSchema = factory.getSchema(
-                JSONSchemaTest.class.getResourceAsStream("/schema.json"));
+        String v1 = mapper.readTree(
+                JSONSchemaTest.class.getResourceAsStream("/schema.json")).toString();
+        SchemaRegistry schemaRegistry = SchemaRegistry.withDialect(Dialects.getDraft202012(),
+                builder -> builder.schemas(Map.of("/schema.json", v1)));
+        Schema schema = schemaRegistry.getSchema(SchemaLocation.of("/schema.json"));
+        ExecutionConfig executionConfig = new ExecutionConfig.Builder().locale(Locale.ENGLISH).build();
         JsonNode jsonNode = mapper.readTree(
                 JSONSchemaTest.class.getResourceAsStream("/product_valid.json"));
-        Set<ValidationMessage> errors = jsonSchema.validate(jsonNode);
+        List<Error> errors = schema.validate(jsonNode, executionContext -> executionContext.setExecutionConfig(executionConfig));
         assertThat(errors).isEmpty();
     }
 
