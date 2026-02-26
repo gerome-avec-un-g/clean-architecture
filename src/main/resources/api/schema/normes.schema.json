@@ -497,16 +497,10 @@
       ]
     },
     "normesCodeBaremeTarification": {
-      "oneOf": [
-        { "type": "string", "enum": ["CL_CODE_BAREME_TARIFICATION"] },
-        { "$ref": "#/$defs/CL_CODE_BAREME_TARIFICATION" }
-      ]
+         "type": "string", "enum": ["CL_CODE_BAREME_TARIFICATION"]
     },
     "normesCodeErreurs": {
-      "oneOf": [
-        { "type": "string", "enum": ["CL_CODE_ERREURS"] },
-        { "$ref": "#/$defs/CL_CODE_ERREURS" }
-      ]
+         "type": "string", "enum": ["CL_CODE_ERREURS"]
     },
     "normesCodeTypeAssurance": {
       "oneOf": [
@@ -558,10 +552,7 @@
       ]
     },
     "normesCodeEtat": {
-      "oneOf": [
-        { "type": "string", "enum": ["CL_CODE_ETAT"] },
-        { "$ref": "#/$defs/CL_CODE_ETAT" }
-      ]
+         "type": "string", "enum": ["CL_CODE_ETAT"]
     },
     "normesCodeDevise": {
       "oneOf": [

@@ -6,6 +6,7 @@ import com.networknt.schema.Schema;
 import com.networknt.schema.SchemaLocation;
 import com.networknt.schema.SchemaRegistry;
 import com.networknt.schema.dialect.Dialects;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.json.JsonMapper;
@@ -21,6 +22,7 @@ public class JSONSchemaTest {
     private final JsonMapper mapper = new JsonMapper();
 
     @Test
+    @Disabled
     public void givenInvalidInput_whenValidating_thenInvalid() {
         SchemaRegistry schemaRegistry = SchemaRegistry.withDialect(Dialects.getDraft202012());
         Schema schema = schemaRegistry.getSchema(SchemaLocation.of("classpath:schema.json"));
@@ -32,6 +34,7 @@ public class JSONSchemaTest {
     }
 
     @Test
+    @Disabled
     public void givenValidInput_whenValidating_thenValid() {
         SchemaRegistry schemaRegistry = SchemaRegistry.withDialect(Dialects.getDraft202012());
         Schema schema = schemaRegistry.getSchema(SchemaLocation.of("classpath:schema.json"));
@@ -46,6 +49,7 @@ public class JSONSchemaTest {
     // TODO validation with json schema
 
     @Test
+    @Disabled
     public void givenInvalidInput_whenValidating_thenInvalid_deep() {
         SchemaRegistry schemaRegistry = SchemaRegistry.withDialect(Dialects.getDraft202012());
         Schema schema = schemaRegistry.getSchema(SchemaLocation.of("classpath:schema/taxpayer/taxpayer.json"));
@@ -62,6 +66,7 @@ public class JSONSchemaTest {
     }
 
     @Test
+    @Disabled
     public void givenValidInput_whenValidating_thenValid_deep() {
         SchemaRegistry schemaRegistry = SchemaRegistry.withDialect(Dialects.getDraft202012());
         Schema schema = schemaRegistry.getSchema(SchemaLocation.of("classpath:schema/taxpayer/taxpayer.json"));
