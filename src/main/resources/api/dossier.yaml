@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.1.2
 info:
   title: Dossier API
   description: Une description multiligne qui accepte du **CommonMark**  !
-  version: 0.1
+  version: "0.1"
 servers:
   - url: https://localhost:8080/v1
     description: local server
@@ -17,22 +17,22 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'schema/dossierReponse.schema.json'
-#    post:
-#      summary: créé un dossier
-#      description: Une description plus longue expliquant le principe de création
-#      operationId: creationDossier
-#      tags:
-#        - dossier
-#      requestBody:
-#        content:
-#          application/json:
-#            schema:
-#              $ref: 'schema/dossier.schema.json'
-#      responses:
-#        '200':
-#          description: le dossier
-#          content:
-#            application/json:
-#              schema:
-#                $ref: 'schema/dossierReponse.schema.json'
+                $ref: 'components/schema/dossierReponse.schema.json'
+    post:
+      summary: créé un dossier
+      description: Une description plus longue expliquant le principe de création
+      operationId: creationDossier
+      tags:
+        - dossier
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'components/schema/dossier.schema.json'
+      responses:
+        '200':
+          description: le dossier
+          content:
+            application/json:
+              schema:
+                $ref: 'components/schema/dossierReponse.schema.json'

@@ -165,8 +165,10 @@
                             <useResponseEntity>false</useResponseEntity>
                             <useTags>true</useTags>
                             <dateLibrary>java8</dateLibrary>
-<!--                            <useSpringBoot3>true</useSpringBoot3>-->
-                            <useJakartaEe>true</useJakartaEe>
+                            <useJackson3>true</useJackson3>
+                            <useSpringBoot4>true</useSpringBoot4>
+                            <openApiNullable>false</openApiNullable>
+<!--                            <useJakartaEe>true</useJakartaEe>-->
 <!--                            <serializableModel>true</serializableModel>-->
                             <unhandledException>true</unhandledException>
 <!--                            <skipValidateSpec>true</skipValidateSpec>-->
