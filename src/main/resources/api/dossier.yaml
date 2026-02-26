@@ -18,3 +18,21 @@ paths:
             application/json:
               schema:
                 $ref: 'schema/dossierReponse.schema.json'
+#    post:
+#      summary: créé un dossier
+#      description: Une description plus longue expliquant le principe de création
+#      operationId: creationDossier
+#      tags:
+#        - dossier
+#      requestBody:
+#        content:
+#          application/json:
+#            schema:
+#              $ref: 'schema/dossier.schema.json'
+#      responses:
+#        '200':
+#          description: le dossier
+#          content:
+#            application/json:
+#              schema:
+#                $ref: 'schema/dossierReponse.schema.json'

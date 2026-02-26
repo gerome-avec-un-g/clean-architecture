@@ -160,11 +160,16 @@
                         <apiPackage>fr.gerome.cleanarchitecture.infrastructure.restendpoints.api</apiPackage>
                         <modelPackage>fr.gerome.cleanarchitecture.infrastructure.restendpoints.model</modelPackage>
                         <configOptions>
+                            <sourceFolder>src/gen/java/main</sourceFolder>
                             <interfaceOnly>true</interfaceOnly>
-                            <useSpringBoot3>true</useSpringBoot3>
+                            <useResponseEntity>false</useResponseEntity>
+                            <useTags>true</useTags>
+                            <dateLibrary>java8</dateLibrary>
+<!--                            <useSpringBoot3>true</useSpringBoot3>-->
                             <useJakartaEe>true</useJakartaEe>
-                            <serializableModel>true</serializableModel>
+<!--                            <serializableModel>true</serializableModel>-->
                             <unhandledException>true</unhandledException>
+<!--                            <skipValidateSpec>true</skipValidateSpec>-->
                         </configOptions>
                     </configuration>
                 </execution>

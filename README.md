@@ -21,6 +21,10 @@ http://localhost:8080/1/authors
 http://localhost:8080/2/authors
 ```
 
+https://stackoverflow.com/questions/71121399/how-do-i-incorporate-json-schema-into-my-openapi-file
+https://www.sfeir.dev/back/generer-vos-client-dapi-a-partir-de-leur-specification-openapi/
+https://openapi-generator.tech/docs/plugins/
+
 ## Architecture
 
 ```mermaid
