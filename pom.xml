@@ -127,29 +127,29 @@
 <!--                    </execution>-->
 <!--                </executions>-->
 <!--            </plugin>-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>com.cosium.json_schema_to_java_record</groupId>
-                            <artifactId>json-schema-to-java-record</artifactId>
-                            <version>2.0</version>
-                        </path>
-                    </annotationProcessorPaths>
-                </configuration>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-compiler-plugin</artifactId>-->
+<!--                <configuration>-->
+<!--                    <annotationProcessorPaths>-->
+<!--                        <path>-->
+<!--                            <groupId>com.cosium.json_schema_to_java_record</groupId>-->
+<!--                            <artifactId>json-schema-to-java-record</artifactId>-->
+<!--                            <version>2.0</version>-->
+<!--                        </path>-->
+<!--                    </annotationProcessorPaths>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
             <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>7.2.0</version> <executions>
+                <version>7.20.0</version> <executions>
                 <execution>
                     <goals>
                         <goal>generate</goal>
                     </goals>
                     <configuration>
-                        <inputSpec>${project.basedir}/src/main/resources/api/order-system.yaml</inputSpec>
+                        <inputSpec>${project.basedir}/src/main/resources/api/dossier.yaml</inputSpec>
                         <generatorName>spring</generatorName>
                         <apiPackage>fr.gerome.cleanarchitecture.infrastructure.restendpoints.api</apiPackage>
                         <modelPackage>fr.gerome.cleanarchitecture.infrastructure.restendpoints.model</modelPackage>

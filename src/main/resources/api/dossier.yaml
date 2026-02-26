@@ -1,0 +1,20 @@
+openapi: 3.1.0
+info:
+  title: Dossier API
+  description: Une description multiligne qui accepte du **CommonMark**  !
+  version: 0.1
+servers:
+  - url: https://localhost:8080/v1
+    description: local server
+paths:
+  /dossier:
+    get:
+      summary: retourne le dossier d'un utilisateur
+      description: Une description plus longue expliquant le principe
+      responses:
+        '200':
+          description: le dossier
+          content:
+            application/json:
+              schema:
+                $ref: 'schema/dossierReponse.schema.json'
