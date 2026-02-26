@@ -1,0 +1,21 @@
+{
+  "titre": "Type de taux",
+  "description": "Table de valeur (code/label) pour le type de taux",
+  "documentationUrl": "https://example.com/docs/normes/CL_TYPE_TAUX.json",
+  "version_schema": "v0.0.1",
+  "langue": "fr",
+  "values": [
+    {
+      "code": "F",
+      "label": "Fixe"
+    },
+    {
+      "code": "V",
+      "label": "Variable"
+    },
+    {
+      "code": "M",
+      "label": "Mixte"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "items/balance.schema.json",
+  "title": "balance (OpenBanking account Item)",
+  "schemaVersion": "1.0.0",
+  "description": "Structure d'un solde bancaire agrégé issu de l'open banking, utilisé pour enrichir les dossiers de demande de garantie.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "balanceType": { "type": "string", "enum": ["openingBooked","closingBooked","interimAvailable","interimBooked","expected"] },
+    "dateTime": { "type": "string", "format": "date-time" },
+    "amount": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "currency": { "type": "string", "pattern": "^[A-Z]{3}$" },
+        "amount": { "type": "number", "format": "double" }
+      },
+      "required": ["currency","amount"]
+    },
+    "creditDebitIndicator": { "type": "string", "enum": ["credit","debit"] }
+  },
+  "required": ["balanceType","amount"]
+}

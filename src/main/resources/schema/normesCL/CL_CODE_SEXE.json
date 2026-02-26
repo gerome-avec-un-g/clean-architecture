@@ -1,0 +1,17 @@
+{
+  "titre": "Sexe",
+  "description": "Table de valeur (code/label) pour le sexe",
+  "documentationUrl": "https://example.com/docs/normes/CL_SEXE.json",
+  "version_schema": "v0.0.1",
+  "langue": "fr",
+  "values": [
+    {
+      "code": "F",
+      "label": "Féminin"
+    },
+    {
+      "code": "M",
+      "label": "Masculin"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "titre": "Nature du prêt",
+  "description": "Table de valeur (code/label) pour la nature du prêt",
+  "documentationUrl": "https://example.com/docs/normes/CL_NATURE_PRET.json",
+  "version_schema": "v0.0.1",
+  "langue": "fr",
+  "values": [
+    { "code": "CAP", "label": "Prêt de capitalisation" },
+    { "code": "CIL", "label": "Prêt 1 %" },
+    { "code": "FAM", "label": "Prêt familial" },
+    { "code": "FON", "label": "Prêt fonctionnaire" },
+    { "code": "PBC", "label": "Prêt classique" },
+    { "code": "PBG", "label": "Prêt bancaire global" },
+    { "code": "PCE", "label": "Complément épargne logement" },
+    { "code": "PCO", "label": "Prêt conventionné" },
+    { "code": "PEL", "label": "Prêt épargne logement" },
+    { "code": "PTZ", "label": "Prêt à taux zéro" },
+    { "code": "REL", "label": "Prêt relais" },
+    { "code": "RET", "label": "Prêt retraite" },
+    { "code": "SOC", "label": "Prêt social" },
+    { "code": "VEN", "label": "Crédit vendeur" },
+    { "code": "ECO", "label": "PTZ écologique" }
+  ]
+}

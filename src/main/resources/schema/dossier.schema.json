@@ -1,0 +1,2113 @@
+{
+  "$comment": "Schéma JSON décrivant la structure d'une demande de garantie",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "dossier.schema.json",
+  "title": "Demande de garantie Crédit Logement",
+  "schemaVersion": "1.00.00-SNAPSHOT",
+  "description": "Schéma complet d'un dossier de demande de garantie",
+  "type": "object",
+  "required": [
+    "metadata",
+    "payload"
+  ],
+  "properties": {
+    "metadata": {
+      "$ref": "#/$defs/Metadata"
+    },
+    "payload": {
+      "$ref": "#/$defs/Payload"
+    }
+  },
+  "$defs": {
+    "Metadata": {
+      "type": "object",
+      "required": [
+        "type",
+        "schemaVersion",
+        "timestamp",
+        "requestId",
+        "source"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "dossier",
+          "description": "Ressource exposée par l'API"
+        },
+        "schemaVersion": {
+          "type": "string",
+          "description": "Version du schéma utilisé. Format: vX.Y.e — X = major, Y = minor, e = patch (sous‑version)",
+          "minLength": 1
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Horodatage de l'événement au format ISO 8601 (date-time)",
+          "examples": [
+            "2026-01-26T12:00:00Z"
+          ]
+        },
+        "requestId": {
+          "type": "string",
+          "description": "Identifiant unique de la requête (UUID recommandé)",
+          "minLength": 1
+        },
+        "source": {
+          "type": "string",
+          "description": "Système émetteur",
+          "minLength": 1
+        },
+        "idempotencyKey": {
+          "type": "string",
+          "description": "Clé d'idempotence fournie par le client (optionnelle). Recommandée pour les opérations non-idempotentes (ex. POST créant une ressource, actions de validation/annulation) afin d'éviter la création ou l'exécution en double après un retry réseau. Valeur opaque ou UUID ; doit rester stable pour la même intention de commande",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false,
+      "examples": [
+        {
+          "type": "dossier",
+          "schemaVersion": "1.0.0",
+          "timestamp": "2026-01-15T10:00:00Z",
+          "requestId": "4f6b8c9d-7e2b-4f1a-b2c3-abcdef123456",
+          "source": "partner-system",
+          "idempotencyKey": "partner-12345-20260115-1"
+        }
+      ]
+    },
+    "Payload": {
+      "type": "object",
+      "description": "Payload du dossier. Note: referenceDossierCreditLogement n'est PAS ici pour PUT/GET/DELETE (passé dans l'URL comme {id}). Pour POST, il est généré et retourné dans la réponse lors de la création du dossier",
+      "required": [
+        "referenceDossierPartenaire",
+        "organismePreteur",
+        "organismeDestinataireLettreAccord",
+        "individus",
+        "projet",
+        "coutsOperation",
+        "financement"
+      ],
+      "properties": {
+        "referenceDossierPartenaire": {
+          "type": "string",
+          "description": "Référence unique du dossier chez le partenaire",
+          "minLength": 1,
+          "maxLength": 32
+        },
+        "provenanceCourtier": {
+          "type": "boolean",
+          "description": "Précise si le dossier est apporté par un courtier"
+        },
+        "libelleCourtier": {
+          "type": "string",
+
+          "minLength": 1,
+          "maxLength": 38
+        },
+        "commentaire": {
+          "type": "string",
+          "description": "Éléments complémentaires permettant de préciser certains aspects du dossier",
+          "minLength": 1,
+          "maxLength": 750
+        },
+        "interlocuteur": {
+          "$ref": "#/$defs/Interlocuteur"
+        },
+        "organismePreteur": {
+          "$ref": "organisme.schema.json",
+          "description": "Organisme prêteur associé au dossier"
+        },
+        "organismeDestinataireLettreAccord": {
+          "$ref": "organisme.schema.json",
+          "description": "Organisme destinataire de la lettre d'accord"
+        },
+        "referenceInternetCreditLogement": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 18,
+          "description": "Référence Crédit Logement de la simulation du dossier"
+        },
+        "resultatSimulationInternet": {
+          "type": "object",
+          "required": [
+            "code",
+            "norme"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Décision Crédit Logement de la simulation du dossier",
+              "minLength": 1,
+              "maxLength": 2,
+              "examples": [
+                "OK",
+                "ET"
+              ]
+            },
+            "norme": {
+              "$ref": "normes.schema.json#/$defs/normesCodeResultatSimulation"
+            }
+          },
+          "additionalProperties": false
+        },
+        "primoAccedant": {
+          "type": "boolean",
+          "description": "Mentionne si l'emprunteur accède à la propriété pour la première fois (n'ayant pas été propriétaire de sa résidence principale au cours des deux dernières années)"
+        },
+        "individus": {
+          "$ref": "#/$defs/Individus"
+        },
+        "projet": {
+          "$ref": "#/$defs/Projet"
+        },
+        "coutsOperation": {
+          "$ref": "#/$defs/CoutsOperation"
+        },
+        "financement": {
+          "$ref": "#/$defs/Financement"
+        },
+        "patrimoine": {
+          "$ref": "#/$defs/Patrimoine"
+        },
+        "open_data": {
+          "type": "object",
+          "description": "Conteneur facultatif pour les données open (open_banking et open_fiscal_data)",
+          "properties": {
+            "open_banking": {
+              "$ref": "openData/openbanking/openBanking.schema.json"
+            },
+            "open_fiscal_data": {
+              "$ref": "openData/openFiscalData/openFiscalData.schema.json"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "Interlocuteur": {
+      "type": "object",
+      "description": "Coordonnées de l'interlocuteur bancaire en charge du dossier",
+      "required": [
+        "email",
+        "nom",
+        "prenom",
+        "telephone"
+      ],
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "nom": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 38
+        },
+        "prenom": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 25
+        },
+        "telephone": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[0-9]{10}$",
+          "description": "Numéro français composé de 10 chiffres"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Individus": {
+      "type": "object",
+      "required": [
+        "personnesPhysiques"
+      ],
+      "properties": {
+        "personnesMorales": {
+          "type": "array",
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/$defs/PersonneMorale"
+          }
+        },
+        "personnesPhysiques": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 12,
+          "items": {
+            "$ref": "#/$defs/PersonnePhysique"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "description": "Présence d’au moins une personne physique (au plus 12)"
+    },
+    "Charge": {
+      "type": "object",
+      "required": [
+        "type",
+        "montant",
+        "periodicite"
+      ],
+      "properties": {
+        "type": {
+          "type": "object",
+          "required": [
+            "code",
+            "norme"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 3,
+              "description": "Type de charge",
+              "examples": [
+                "ALI",
+                "CSM",
+                "LOY",
+                "PIP",
+                "PIV",
+                "REV",
+                "VIA"
+              ]
+            },
+            "norme": {
+              "$ref": "normes.schema.json#/$defs/normesCodeTypeCharge"
+            }
+          },
+          "additionalProperties": false
+        },
+        "montant": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 99999999,
+          "multipleOf": 0.01,
+          "description": "Montant de la charge"
+        },
+        "periodicite": {
+          "type": "object",
+          "required": [
+            "code",
+            "norme"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Périodicité de la charge",
+              "minLength": 1,
+              "maxLength": 1,
+              "examples": [
+                "M",
+                "A"
+              ]
+            },
+            "norme": {
+              "$ref": "normes.schema.json#/$defs/normesCodePeriodicite"
+            }
+          },
+          "additionalProperties": false
+        },
+        "dateDerniereEcheance": {
+          "type": "string",
+          "format": "date",
+          "description": "Donnée relative au remboursement d’une charge (hors financement de l’opération). Sans date de fin, la charge sera considérée comme pérenne"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Revenu": {
+      "type": "object",
+      "required": [
+        "type",
+        "periodicite",
+        "montant"
+      ],
+      "properties": {
+        "type": {
+          "type": "object",
+          "required": [
+            "code",
+            "norme"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 3,
+              "description": "Type de revenu",
+              "examples": [
+                "ALI",
+                "ALO",
+                "APL",
+                "ASS",
+                "BEN",
+                "COM",
+                "INV",
+                "LAP",
+                "LOP",
+                "PRI",
+                "RBF",
+                "RET",
+                "REV",
+                "SAL",
+                "TIT",
+                "VIA"
+              ]
+            },
+            "norme": {
+              "$ref": "normes.schema.json#/$defs/normesCodeTypeRevenu"
+            }
+          },
+          "additionalProperties": false
+        },
+        "montant": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 99999999,
+          "multipleOf": 0.01,
+          "description": "Montant du revenu"
+        },
+        "periodicite": {
+          "type": "object",
+          "required": [
+            "code",
+            "norme"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Périodicité du revenu",
+              "minLength": 1,
+              "maxLength": 1,
+              "examples": [
+                "M",
+                "A"
+              ]
+            },
+            "norme": {
+              "$ref": "normes.schema.json#/$defs/normesCodePeriodicite"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "PersonneMorale": {
+      "type": "object",
+      "description": "Il peut s’agir de SCI familiale, SARL familiale, EURL, SAS ou SASU",
+      "required": [
+        "indice",
+        "nom",
+        "adresse",
+        "nombreAssociesMajeurs",
+        "charges",
+        "revenus"
+      ],
+      "properties": {
+        "indice": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12,
+          "description": "Ce numéro permet d’identifier de manière unique un individu au sein du flux (Personnes morales et physiques)"
+        },
+        "type": {
+          "type": "object",
+          "required": [
+            "code",
+            "norme"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Type de personne morale",
+              "minLength": 1,
+              "maxLength": 5,
+              "examples": [
+                "SCI"
+              ]
+            },
+            "norme": {
+              "$ref": "normes.schema.json#/$defs/normesCodeTypePersonneMorale"
+            }
+          },
+          "additionalProperties": false
+        },
+        "nom": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 38
+        },
+        "adresse": {
+          "$ref": "adresse.schema.json"
+        },
+        "nombreAssociesMajeurs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 99
+        },
+        "charges": {
+          "type": "array",
+          "maxItems": 15,
+          "items": {
+            "$ref": "#/$defs/Charge"
+          }
+        },
+        "revenus": {
+          "type": "array",
+          "maxItems": 15,
+          "items": {
+            "$ref": "#/$defs/Revenu"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "PersonnePhysique": {
+      "type": "object",
+      "required": [
+        "indice",
+        "nom",
+        "sexe",
+        "nationalite",
+        "residentFrancais",
+        "dateNaissance",
+        "situationFamiliale",
+        "adresseNaissance",
+        "adresse",
+        "professions"
+      ],
+      "properties": {
+        "indice": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12,
+          "description": "Ce numéro permet d’identifier de manière unique un individu au sein du flux (Personnes morales et physiques)"
+        },
+        "nom": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 38
+        },
+        "nomUsage": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 38,
+          "description": "Le nom d’usage se distingue du nom de famille (nom de naissance). Le nom d'usage est le nom que vous pouvez utiliser dans la vie quotidienne"
+        },
+        "prenomUsuel": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 25,
+          "description": "Prénom par lequel une personne est appelée dans la vie courante et il doit être inscrit dans l’acte de naissance"
+        },
+        "autresPrenoms": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 25,
+          "description": "Prénoms additionnels enregistrés à l’état civil en complément du prénom usuel"
+        },
+        "sexe": {
+          "type": "object",
+          "required": [
+            "code",
+            "norme"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Sexe de la personne",
+              "minLength": 1,
+              "maxLength": 1,
+              "examples": [
+                "F",
+                "M"
+              ]
+            },
+            "norme": {
+              "$ref": "normes.schema.json#/$defs/normesCodeSexe"
+            }
+          },
+          "additionalProperties": false
+        },
+        "nationalite": {
+          "type": "object",
+          "required": [
+            "code",
+            "norme"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Code pays selon la norme spécifiée",
+              "minLength": 2,
+              "maxLength": 3,
+              "pattern": "^[A-Z]{2,3}$"
+            },
+            "norme": {
+              "$ref": "normes.schema.json#/$defs/normesCodePays"
+            }
+          },
+          "additionalProperties": false
+        },
+        "residentFrancais": {
+          "type": "boolean"
+        },
+        "dateNaissance": {
+          "type": "string",
+          "format": "date"
+        },
+        "adresseNaissance": {
+          "allOf": [
+            {
+              "$ref": "adresse.schema.json"
+            },
+            {
+              "type": "object",
+              "required": [
+                "ville",
+                "pays"
+              ],
+              "oneOf": [
+                {
+                  "required": [
+                    "codePostal"
+                  ]
+                },
+                {
+                  "required": [
+                    "codeInseeCommune"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "adresse": {
+          "allOf": [
+            {
+              "$ref": "adresse.schema.json"
+            },
+            {
+              "type": "object",
+              "required": [
+                "rue",
+                "ville"
+              ],
+              "oneOf": [
+                {
+                  "required": [
+                    "codePostal"
+                  ]
+                },
+                {
+                  "required": [
+                    "codeInseeCommune"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "situationFamiliale": {
+          "type": "object",
+          "required": [
+            "code",
+            "norme"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Situation familiale (incluant le régime matrimonial)",
+              "minLength": 1,
+              "maxLength": 2,
+              "examples": [
+                "C",
+                "D",
+                "IC",
+                "IS",
+                "MC",
+                "MS",
+                "S",
+                "SC",
+                "SS",
+                "U",
+                "V"
+              ]
+            },
+            "norme": {
+              "$ref": "normes.schema.json#/$defs/normesCodeSituationFamille"
+            }
+          },
+          "additionalProperties": false
+        },
+        "ancienneteBancaire": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}$",
+          "description": "Date d’ouverture d’un compte de dépôt au sein de votre banque"
+        },
+        "employePreteur": {
+          "type": "boolean",
+          "description": "Lorsque l’un des intervenants est salarié ou retraité de la banque, le client bénéficie d’un barème préférentiel pour le coût de la garantie"
+        },
+        "pourcentagePartSci": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "multipleOf": 0.01
+        },
+        "indiceConjoint": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12,
+          "description": ""
+        },
+        "nombrePersonnesACharge": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 15,
+          "description": "Nombre de personnes à charge (descendants, ascendants, autres …)"
+        },
+        "nombreEnfantsACharge": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 15,
+          "description": "Nombre d'enfants à charge selon XSD (0-15)"
+        },
+        "codeResidencePrincipale": {
+          "type": "object",
+          "required": [
+            "code",
+            "norme"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Code résidence principale",
+              "minLength": 1,
+              "maxLength": 3,
+              "examples": [
+                "PRO",
+                "LOC",
+                "GRA"
+              ]
+            },
+            "norme": {
+              "$ref": "normes.schema.json#/$defs/normesCodeTypeResidencePrincipale"
+            }
+          },
+          "additionalProperties": false
+        },
+        "interrogationFicpRealisee": {
+          "type": "boolean"
+        },
+        "ageEnfantsACharge": {
+          "type": "array",
+          "maxItems": 15,
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 99
+          }
+        },
+        "professions": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2,
+          "items": {
+            "$ref": "#/$defs/Profession"
+          }
+        },
+        "revenus": {
+          "type": "array",
+          "maxItems": 15,
+          "items": {
+            "$ref": "#/$defs/Revenu"
+          }
+        },
+        "charges": {
+          "type": "array",
+          "maxItems": 15,
+          "items": {
+            "$ref": "#/$defs/Charge"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "Profession": {
+      "type": "object",
+      "required": [
+        "categorieSocioProfessionnelle"
+      ],
+      "properties": {
+        "categorieSocioProfessionnelle": {
+          "type": "object",
+          "required": [
+            "code",
+            "norme"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Code de la catégorie socio-professionnelle selon la norme spécifiée",
+              "minLength": 1,
+              "maxLength": 5
+            },
+            "norme": {
+              "$ref": "normes.schema.json#/$defs/normesCodeCsp"
+            }
+          },
+          "additionalProperties": false
+        },
+        "natureContrat": {
+          "type": "object",
+          "required": [
+            "code",
+            "norme"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Type de contrat de travail",
+              "minLength": 1,
+              "maxLength": 3,
+              "examples": [
+                "CDD",
+                "CDI",
+                "CON",
+                "VAC"
+              ]
+            },
+            "norme": {
+              "$ref": "normes.schema.json#/$defs/normesCodeTypeContratTravail"
+            }
+          },
+          "additionalProperties": false
+        },
+        "periodeEssai": {
+          "type": "boolean"
+        },
+        "dateAnciennete": {
+          "type": "string",
+          "format": "date"
+        },
+        "secteurActivite": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "numeroSiren": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 999999999
+        },
+        "dateOuvertureCompte": {
+          "type": "string",
+          "format": "date"
+        },
+        "compteProfessionnel": {
+          "type": "boolean"
+        },
+        "chiffresAffaires": {
+          "$ref": "#/$defs/DonneeAnnuellePositive",
+          "description": "Chiffre d’affaires par année"
+        },
+        "benefices": {
+          "$ref": "#/$defs/DonneeAnnuelleBase"
+        },
+        "resultatsExploitation": {
+          "$ref": "#/$defs/DonneeAnnuelleBase"
+        },
+        "fondsPropres": {
+          "$ref": "#/$defs/DonneeAnnuelleBase"
+        },
+        "dettesProfessionnelles": {
+          "$ref": "#/$defs/DonneeAnnuellePositive"
+        },
+        "tresoreriesNettes": {
+          "$ref": "#/$defs/DonneeAnnuelleBase"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DonneeAnnuelleBase": {
+      "type": "object",
+      "description": "Données annuelles indexées par étiquette (N, N-1, N-2, N-3) représentant un montant qui peut être négatif",
+      "propertyNames": {
+        "pattern": "^(N|N-1|N-2|N-3)$"
+      },
+      "additionalProperties": {
+        "type": "number",
+        "minimum": -99999999,
+        "maximum": 99999999,
+        "multipleOf": 0.01
+      },
+      "minProperties": 1,
+      "maxProperties": 4
+    },
+    "DonneeAnnuellePositive": {
+      "description": "Données annuelles indexées par étiquette (N, N-1, N-2, N-3) représentant un montant positif uniquement. Hérite de DonneeAnnuelleBase",
+      "allOf": [
+        {
+          "$ref": "#/$defs/DonneeAnnuelleBase"
+        },
+        {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 99999999,
+            "multipleOf": 0.01
+          }
+        }
+      ],
+      "minProperties": 1,
+      "maxProperties": 4
+    },
+    "Projet": {
+      "type": "object",
+      "required": [
+        "bien",
+        "nature",
+        "pleinePropriete"
+      ],
+      "properties": {
+        "parcellesCadastrales": {
+          "type": "array",
+          "maxItems": 5,
+          "items": {
+            "type": "object",
+            "required": [
+              "identifiant"
+            ],
+            "properties": {
+              "identifiant": {
+                "type": "string",
+                "pattern": "^[0-9A-Z]{14}$",
+                "description": "Identifiant de parcelle cadastrale (14 caractères)"
+              }
+            },
+            "additionalProperties": false
+          },
+          "additionalProperties": false
+        },
+        "bien": {
+          "$ref": "#/$defs/Bien"
+        },
+        "nature": {
+          "type": "object",
+          "required": [
+            "code",
+            "norme"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Nature de l’opération",
+              "minLength": 1,
+              "maxLength": 3,
+              "examples": [
+                "ACO",
+                "ACR",
+                "AQA",
+                "AQN",
+                "ARA",
+                "ARN",
+                "ATR",
+                "ATV",
+                "CON",
+                "COR",
+                "COS",
+                "RAC",
+                "RSO",
+                "SCP",
+                "SOU",
+                "TRC",
+                "TSO",
+                "TVX"
+              ]
+            },
+            "norme": {
+              "$ref": "normes.schema.json#/$defs/normesCodeNatureOperation"
+            }
+          },
+          "additionalProperties": false
+        },
+        "naturePropriete": {
+          "type": "object",
+          "required": [
+            "code",
+            "norme"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Nature de la propriété",
+              "minLength": 1,
+              "maxLength": 3,
+              "examples": [
+                "BRS"
+              ]
+            },
+            "norme": {
+              "$ref": "normes.schema.json#/$defs/normesCodeNaturePropriete"
+            }
+          },
+          "additionalProperties": false
+        },
+        "pleinePropriete": {
+          "type": "boolean"
+        },
+        "valeurVenale": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 99999999
+        },
+        "montantEncours": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 99999999
+        },
+        "donation": {
+          "type": "boolean"
+        },
+        "droitRetour": {
+          "type": "boolean"
+        },
+        "droitAlienationHypotheque": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Bien": {
+      "type": "object",
+      "required": [
+        "type",
+        "destination",
+        "adresse"
+      ],
+      "properties": {
+        "type": {
+          "type": "object",
+          "required": [
+            "code",
+            "norme"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Type de bien",
+              "minLength": 1,
+              "maxLength": 3,
+              "examples": [
+                "APT",
+                "APS",
+                "COM",
+                "GAR",
+                "MAI",
+                "MIX",
+                "SCP",
+                "TER"
+              ]
+            },
+            "norme": {
+              "$ref": "normes.schema.json#/$defs/normesCodeTypeBien"
+            }
+          },
+          "additionalProperties": false
+        },
+        "adresse": {
+          "allOf": [
+            {
+              "$ref": "adresse.schema.json"
+            },
+            {
+              "type": "object",
+              "required": [
+                "pays"
+              ]
+            },
+            {
+              "type": "object",
+              "required": [
+                "rue",
+                "codePostal",
+                "ville"
+              ]
+            }
+          ]
+        },
+        "destination": {
+          "type": "object",
+          "required": [
+            "code",
+            "norme"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Destination du bien)",
+              "minLength": 1,
+              "maxLength": 2,
+              "examples": [
+                "LO",
+                "MI",
+                "PR",
+                "RP",
+                "RS",
+                "ZZ"
+              ]
+            },
+            "norme": {
+              "$ref": "normes.schema.json#/$defs/normesCodeDestinationBien"
+            }
+          },
+          "additionalProperties": false
+        },
+        "surfaceHabitable": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 9999
+        },
+        "surfaceCreee": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 999
+        },
+        "nombrePieces": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 99
+        },
+        "surfaceTerrain": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 99999
+        },
+        "anneeConstruction": {
+          "type": "integer",
+          "minimum": 1700,
+          "maximum": 2099
+        },
+        "etage": {
+          "type": "integer",
+          "minimum": -9,
+          "maximum": 100
+        },
+        "placeGarage": {
+          "type": "boolean"
+        },
+        "espaceExterieur": {
+          "type": "boolean"
+        },
+        "diagnosticPerformanceEnergetique": {
+          "$ref": "#/$defs/DPE"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DPE": {
+      "type": "object",
+      "properties": {
+        "classe": {
+          "type": "object",
+          "required": [
+            "code",
+            "norme"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Il s’agit de la classe DPE du bien objet de l’opération",
+              "minLength": 1,
+              "maxLength": 1,
+              "examples": [
+                "A",
+                "B",
+                "C",
+                "D",
+                "E",
+                "F",
+                "G",
+                "Z"
+              ]
+            },
+            "norme": {
+              "$ref": "normes.schema.json#/$defs/normesCodeClassementDpeGes"
+            }
+          },
+          "additionalProperties": false
+        },
+        "numeroAdeme": {
+          "type": "string",
+          "pattern": "^[0-9]{13}$",
+          "description": "il s’agit d’un numéro unique composé de 13 caractères (chiffres et lettres) permettant d’identifier un DPE dans la base de données de l’Agence De l’Environnement et de la Maitrise de l’Energie – ADEME"
+        },
+        "dateEtablissement": {
+          "type": "string",
+          "format": "date"
+        },
+        "dateFinValidite": {
+          "type": "string",
+          "format": "date"
+        },
+        "consommationEnergetique": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10000,
+          "multipleOf": 0.01
+        },
+        "classementGes": {
+          "type": "object",
+          "required": [
+            "code",
+            "norme"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Classement GES (Gaz à Effet de Serre)",
+              "minLength": 1,
+              "maxLength": 1,
+              "examples": [
+                "A",
+                "B",
+                "C",
+                "D",
+                "E",
+                "F",
+                "G",
+                "Z"
+              ]
+            },
+            "norme": {
+              "$ref": "normes.schema.json#/$defs/normesCodeClassementDpeGes"
+            }
+          },
+          "additionalProperties": false
+        },
+        "quantiteGesEmises": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10000,
+          "multipleOf": 0.01
+        },
+        "classeDpeApresTravaux": {
+          "type": "object",
+          "required": [
+            "code",
+            "norme"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Nouvelle classe DPE du bien objet de l’opération après la réalisation des travaux de la part de l’emprunteur",
+              "minLength": 1,
+              "maxLength": 1,
+              "examples": [
+                "A",
+                "B",
+                "C",
+                "D",
+                "E",
+                "F",
+                "G",
+                "Z"
+              ]
+            },
+            "norme": {
+              "$ref": "normes.schema.json#/$defs/normesCodeClassementDpeGes"
+            }
+          },
+          "additionalProperties": false
+        },
+        "classementGesApresTravaux": {
+          "type": "object",
+          "required": [
+            "code",
+            "norme"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Nouveau classement de l’émission de gaz à effet de serre du bien objet de l’opération après la réalisation des travaux de la part de l’emprunteur",
+              "minLength": 1,
+              "maxLength": 1,
+              "examples": [
+                "A",
+                "B",
+                "C",
+                "D",
+                "E",
+                "F",
+                "G",
+                "Z"
+              ]
+            },
+            "norme": {
+              "$ref": "normes.schema.json#/$defs/normesCodeClassementDpeGes"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "CoutsOperation": {
+      "type": "object",
+      "required": [
+        "montantCoutTotal",
+        "postesCout"
+      ],
+      "properties": {
+        "montantCoutTotal": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 99999999
+        },
+        "postesCout": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "type": "object",
+            "required": [
+              "type",
+              "montant"
+            ],
+            "properties": {
+              "type": {
+                "type": "object",
+                "required": [
+                  "code",
+                  "norme"
+                ],
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "description": "Type de poste de coût",
+                    "minLength": 1,
+                    "maxLength": 3,
+                    "examples": [
+                      "ACQ",
+                      "CON",
+                      "FRA",
+                      "RAC",
+                      "TER",
+                      "TVX"
+                    ]
+                  },
+                  "norme": {
+                    "$ref": "normes.schema.json#/$defs/normesCodeTypePosteCout"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "montant": {
+                "type": "number",
+                "minimum": 1,
+                "maximum": 99999999
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "postesTravaux": {
+          "type": "array",
+          "maxItems": 5,
+          "items": {
+            "type": "object",
+            "required": [
+              "type",
+              "montant"
+            ],
+            "properties": {
+              "type": {
+                "type": "object",
+                "required": [
+                  "code",
+                  "norme"
+                ],
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "description": "Ventilation entre les différents types de travaux",
+                    "minLength": 1,
+                    "maxLength": 3,
+                    "examples": [
+                      "AGC",
+                      "ECE",
+                      "AME"
+                    ]
+                  },
+                  "norme": {
+                    "$ref": "normes.schema.json#/$defs/normesCodeTypeTravaux"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "libelle": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 50
+              },
+              "montant": {
+                "type": "number",
+                "minimum": 1,
+                "maximum": 99999999
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "additionalProperties": false
+      },
+        "additionalProperties": false
+      },
+    "Financement": {
+      "type": "object",
+      "required": [
+        "montantApportPersonnel",
+        "baremeTarification",
+        "prets"
+      ],
+      "properties": {
+        "montantApportPersonnel": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 99999999
+        },
+        "baremeTarification": {
+          "type": "object",
+          "required": [
+            "code",
+            "norme"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Choix du barème de tarification à appliquer",
+              "minLength": 1,
+              "maxLength": 1,
+              "examples": [
+                "I",
+                "N"
+              ]
+            },
+            "norme": {
+              "$ref": "normes.schema.json#/$defs/normesCodeBaremeTarification"
+            }
+          },
+          "additionalProperties": false
+        },
+        "prets": {
+          "$ref": "#/$defs/Prets"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Prets": {
+      "type": "object",
+      "required": [
+        "pretsAGarantir "
+      ],
+      "properties": {
+        "pretsAGarantir ": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "$ref": "#/$defs/PretAGarantir"
+          }
+        },
+        "pretsNonGarantis": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "$ref": "#/$defs/PretNonGaranti"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "PretAGarantir": {
+      "type": "object",
+      "required": [
+        "referencePretPartenaire",
+        "referencePretUnique",
+        "nature",
+        "montantPretCautionne",
+        "montantPretTotal",
+        "duree",
+        "periodiciteRemboursement",
+        "typeRemboursement",
+        "tauxHorsAssurance",
+        "typeTaux",
+        "intervenants"
+      ],
+      "properties": {
+        "referencePretPartenaire": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 32,
+          "description": "Cette référence sert à identifier le prêt dans le système d’information du partenaire ainsi que dans les échanges informatisées et autres échanges (courrier, mail, téléphone). Elle peut changer durant la vie du prêt"
+        },
+        "referencePretUnique": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 32,
+          "description": "Ce champ est une référence attribuée par le prêteur permettant d'identifier le prêt dans les échanges informatisés.  Cette référence doit être unique et invariante jusqu'à la fin du prêt"
+        },
+        "referencePretCreditLogement": {
+          "type": "string",
+          "pattern": "^[MI][0-9]{11}$",
+          "description": ": Cet identifiant est généré à la création du prêt dans le SI Crédit Logement"
+        },
+        "nature": {
+          "type": "object",
+          "required": [
+            "code",
+            "norme"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Nature du prêt",
+              "minLength": 1,
+              "maxLength": 3,
+              "examples": [
+                "CAP",
+                "CIL",
+                "FAM",
+                "FON",
+                "PBC",
+                "PBG",
+                "PCE",
+                "PCO",
+                "PEL",
+                "PTZ",
+                "REL",
+                "RET",
+                "SOC",
+                "VEN",
+                "ECO"
+              ]
+            },
+            "norme": {
+              "$ref": "normes.schema.json#/$defs/normesCodeNaturePret"
+            }
+          },
+          "additionalProperties": false
+        },
+        "montantPretCautionne": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 99999999,
+          "multipleOf": 0.01
+        },
+        "montantPretTotal": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 99999999,
+          "multipleOf": 0.01
+        },
+        "montantPretVente": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 99999999,
+          "multipleOf": 0.01,
+          "description": "Montant relatif au prêt lié à la vente (le cas échéant)"
+        },
+        "montantPretDevise": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 99999999,
+          "multipleOf": 0.01
+        },
+        "devise": {
+          "type": "object",
+          "required": [
+            "code",
+            "norme"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Devise du prêt",
+              "minLength": 3,
+              "maxLength": 3,
+              "examples": [
+                "EUR",
+                "CHF"
+              ]
+            },
+            "norme": {
+              "$ref": "normes.schema.json#/$defs/normesCodeDevise"
+            }
+          },
+          "additionalProperties": false
+        },
+        "duree": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 999,
+          "description": "Durée en mois"
+        },
+        "dureeDiffereeFranchise": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 999
+          ,
+          "description": "Durée (en mois) de la période différée/franchise pendant laquelle le remboursement est suspendu ou réduit"
+        },
+        "montantEcheanceFranchise": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 99999999,
+          "multipleOf": 0.01,
+          "description": "Montant de l'échéance applicable pendant la période de franchise"
+        },
+        "dureeAnticipation": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 99999999,
+          "description": "Durée d'anticipation (en mois) applicable au prêt lorsqu'une anticipation des échéances est prévue"
+        },
+        "typeTaux": {
+          "type": "object",
+          "required": [
+            "code",
+            "norme"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Type de taux",
+              "minLength": 1,
+              "maxLength": 1,
+              "examples": [
+                "F",
+                "V",
+                "M"
+              ]
+            },
+            "norme": {
+              "$ref": "normes.schema.json#/$defs/normesCodeTypeTaux"
+            }
+          },
+          "additionalProperties": false
+        },
+        "tauxHorsAssurance": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 100,
+          "multipleOf": 0.01
+        },
+        "pretCape": {
+          "type": "boolean"
+        },
+        "variationTaux": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 100,
+          "multipleOf": 0.01
+        },
+        "dureeNeutralisation": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+          ,
+          "description": "Durée (en mois) de neutralisation durant laquelle certaines conditions du prêt sont figées"
+        },
+        "echeance": {
+          "type": "object",
+          "required": [
+            "montant",
+            "periodicite"
+          ],
+          "properties": {
+            "montant": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 99999999,
+              "multipleOf": 0.01,
+              "description": "Montant de l'échéance"
+            },
+            "periodicite": {
+              "type": "object",
+              "required": [
+                "code",
+                "norme"
+              ],
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "description": "Périodicité dans laquelle s'exprime l'échéance",
+                  "minLength": 1,
+                  "maxLength": 1,
+                  "examples": [
+                    "M",
+                    "A",
+                    "T",
+                    "S"
+                  ]
+                },
+                "norme": {
+                  "$ref": "normes.schema.json#/$defs/normesCodePeriodicite"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "periodiciteRemboursement": {
+          "type": "object",
+          "required": [
+            "code",
+            "norme"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Périodicité de remboursement",
+              "minLength": 1,
+              "maxLength": 1,
+              "examples": [
+                "M",
+                "A",
+                "T",
+                "S"
+              ]
+            },
+            "norme": {
+              "$ref": "normes.schema.json#/$defs/normesCodePeriodicite"
+            }
+          },
+          "additionalProperties": false
+        },
+        "typeRemboursement": {
+          "type": "object",
+          "required": [
+            "code",
+            "norme"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Mode de remboursement",
+              "minLength": 1,
+              "maxLength": 3,
+              "examples": [
+                "CST",
+                "DEG",
+                "FIN",
+                "MOD",
+                "PRO"
+              ]
+            },
+            "norme": {
+              "$ref": "normes.schema.json#/$defs/normesCodeModeRemboursement"
+            }
+          },
+          "additionalProperties": false
+        },
+        "montantEpargnePrealable": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 99999999,
+          "multipleOf": 0.01
+          ,
+          "description": "Montant d'épargne préalable exigé ou versé avant le démarrage du prêt"
+        },
+        "montantEpargneAnnuel": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 99999999,
+          "multipleOf": 0.01,
+          "description": "Montant d'épargne annuel prévu en complément du prêt"
+        },
+        "remboursementInFineInterets": {
+          "type": "boolean",
+          "description": "Indique si le prêt prévoit un remboursement in fine des intérêts (intérêts payés périodiquement, capital remboursé en fin de période)"
+        },
+        "paliers": {
+          "type": "array",
+          "maxItems": 30,
+          "items": {
+            "type": "object",
+            "required": [
+              "montant",
+              "duree"
+            ],
+            "properties": {
+              "montant": {
+                "type": "number",
+                "minimum": 1,
+                "maximum": 99999999,
+                "multipleOf": 0.01
+              },
+              "duree": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 999
+              }
+            },
+            "additionalProperties": false
+          },
+          "description": "Série de paliers (montant et durée) modulant le prêt sur différentes périodes",
+          "additionalProperties": false
+        },
+        "garanties": {
+          "type": "array",
+          "maxItems": 2,
+          "items": {
+            "type": "object",
+            "required": [
+              "type"
+            ],
+            "properties": {
+              "type": {
+                "type": "object",
+                "required": [
+                  "code",
+                  "norme"
+                ],
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "description": "Type de garantie complémentaire",
+                    "minLength": 1,
+                    "maxLength": 3,
+                    "examples": [
+                      "CAP",
+                      "COX",
+                      "NAT",
+                      "ORD",
+                      "PAH",
+                      "NAP"
+                    ]
+                  },
+                  "norme": {
+                    "$ref": "normes.schema.json#/$defs/normesCodeTypeGarantie"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "additionalProperties": false,
+        "intervenants": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 12,
+          "items": {
+            "$ref": "#/$defs/Intervenant"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "Intervenant": {
+      "type": "object",
+      "required": [
+        "indiceIndividu",
+        "qualite",
+        "typeAssurance",
+        "pourcentageAssurance"
+      ],
+      "properties": {
+        "indiceIndividu": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12,
+          "description": "Référence à un individu (doit exister dans personnesMorales ou personnesPhysiques)"
+        },
+        "qualite": {
+          "type": "object",
+          "required": [
+            "code",
+            "norme"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Qualité de l'intervenant",
+              "minLength": 1,
+              "maxLength": 3,
+              "examples": [
+                "EMP",
+                "CAU"
+              ]
+            },
+            "norme": {
+              "$ref": "normes.schema.json#/$defs/normesCodeQualiteIntervenant"
+            }
+          },
+          "additionalProperties": false
+        },
+        "typeAssurance": {
+          "type": "object",
+          "required": [
+            "code",
+            "norme"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Type d'assurance",
+              "minLength": 1,
+              "maxLength": 3,
+              "examples": [
+                "DEC",
+                "DIT",
+                "GPA",
+                "NON",
+                "PIT",
+                "POL"
+              ]
+            },
+            "norme": {
+              "$ref": "normes.schema.json#/$defs/normesCodeTypeAssurance"
+            }
+          },
+          "additionalProperties": false
+        },
+        "pourcentageAssurance": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 100,
+          "multipleOf": 0.01
+        }
+      },
+      "additionalProperties": false
+    },
+    "PretNonGaranti": {
+      "type": "object",
+      "required": [
+        "nature",
+        "montant",
+        "duree",
+        "echeance"
+      ],
+      "properties": {
+        "nature": {
+          "type": "object",
+          "required": [
+            "code",
+            "norme"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Nature du prêt",
+              "minLength": 1,
+              "maxLength": 3
+            },
+            "norme": {
+              "$ref": "normes.schema.json#/$defs/normesCodeNaturePret"
+            }
+          },
+          "additionalProperties": false
+        },
+        "montant": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 99999999,
+          "multipleOf": 0.01
+        },
+        "duree": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 999
+        },
+        "echeance": {
+          "type": "object",
+          "required": [
+            "montant",
+            "periodicite"
+          ],
+          "properties": {
+            "montant": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 99999999,
+              "multipleOf": 0.01,
+              "description": "Montant de l'échéance"
+            },
+            "periodicite": {
+              "type": "object",
+              "required": [
+                "code",
+                "norme"
+              ],
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "description": "Périodicité dans laquelle s'exprime l'échéance",
+                  "minLength": 1,
+                  "maxLength": 1,
+                  "examples": [
+                    "M",
+                    "A",
+                    "T",
+                    "S"
+                  ]
+                },
+                "norme": {
+                  "$ref": "normes.schema.json#/$defs/normesCodePeriodicite"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "dureeDiffereFranchise": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 999
+        },
+        "montantEcheanceFranchise": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 99999999,
+          "multipleOf": 0.01
+        }
+      },
+      "additionalProperties": false
+    },
+    "Patrimoine": {
+      "type": "object",
+      "properties": {
+        "montantPatrimoineMobilier": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 99999999,
+          "multipleOf": 0.01
+        },
+        "biensImmobiliers": {
+          "type": "array",
+          "maxItems": 9,
+          "items": {
+            "$ref": "#/$defs/BienImmobilier"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "BienImmobilier": {
+      "type": "object",
+      "required": [
+        "type",
+        "destination",
+        "adresse",
+        "pleinePropriete",
+        "montantValeur"
+      ],
+      "properties": {
+        "type": {
+          "type": "object",
+          "required": [
+            "code",
+            "norme"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Type de bien immobilier",
+              "minLength": 1,
+              "maxLength": 3,
+              "examples": [
+                "APT",
+                "APS",
+                "COM",
+                "GAR",
+                "MAI",
+                "MIX",
+                "SCP",
+                "TER"
+              ]
+            },
+            "norme": {
+              "$ref": "normes.schema.json#/$defs/normesCodeTypeBien"
+            }
+          },
+          "additionalProperties": false
+        },
+        "adresse": {
+          "allOf": [
+            {
+              "$ref": "adresse.schema.json"
+            },
+            {
+              "type": "object",
+              "required": [
+                "pays"
+              ]
+            }
+          ]
+        },
+        "destination": {
+          "type": "object",
+          "required": [
+            "code",
+            "norme"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Destination du bien",
+              "minLength": 1,
+              "maxLength": 2,
+              "examples": [
+                "LO",
+                "MI",
+                "PR",
+                "RP",
+                "RS",
+                "ZZ"
+              ]
+            },
+            "norme": {
+              "$ref": "normes.schema.json#/$defs/normesCodeDestinationBien"
+            }
+          },
+          "additionalProperties": false
+        },
+        "pleinePropriete": {
+          "type": "boolean"
+        },
+        "montantValeur": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 99999999,
+          "multipleOf": 0.01
+        },
+        "montantEncours": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 99999999,
+          "multipleOf": 0.01
+        },
+        "miseEnVente": {
+          "type": "boolean"
+        },
+        "compromisVente": {
+          "type": "boolean"
+        },
+        "conditionsSuspensivesLevees": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    }
+    }
+}

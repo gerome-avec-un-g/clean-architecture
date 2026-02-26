@@ -1,0 +1,33 @@
+{
+  "titre": "Destination du bien",
+  "description": "Table de valeur (code/label) pour la destination du bien",
+  "documentationUrl": "https://example.com/docs/normes/CL_DESTINATION_BIEN.json",
+  "version_schema": "v0.0.1",
+  "langue": "fr",
+  "values": [
+    {
+      "code": "LO",
+      "label": "Résidence locative"
+    },
+    {
+      "code": "MI",
+      "label": "Résidence a usage mixte"
+    },
+    {
+      "code": "PR",
+      "label": "Professionnel"
+    },
+    {
+      "code": "RP",
+      "label": "Résidence principale"
+    },
+    {
+      "code": "RS",
+      "label": "Résidence secondaire ou en vue de retraite"
+    },
+    {
+      "code": "ZZ",
+      "label": "Résidence ascendant/descendant"
+    }
+  ]
+}

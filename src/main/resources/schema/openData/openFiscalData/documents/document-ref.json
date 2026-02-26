@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "documents/document-ref.json",
+  "title": "DocumentRef",
+  "schemaVersion": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "reference"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "AVIS_IMPOSITION",
+        "ATTESTATION_FISCALE",
+        "LIASSE",
+        "AUTRE"
+      ]
+    },
+    "reference": {
+      "type": "string"
+    },
+    "url": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "issuedAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "issuer": {
+      "$ref": "../../common/entity-ref.json"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "deductions/deduction-item.json",
+  "title": "DeductionItem",
+  "schemaVersion": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "period",
+    "label",
+    "amount"
+  ],
+  "properties": {
+    "period": {
+      "$ref": "../../periods/tax-period.json"
+    },
+    "label": {
+      "type": "string"
+    },
+    "amount": {
+      "$ref": "../../common/monetary-amount.json"
+    }
+  }
+}

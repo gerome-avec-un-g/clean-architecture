@@ -1,0 +1,227 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "assessment/latest-tax-assessment.json",
+  "title": "LatestTaxAssessment (DGFiP + détail par déclarant)",
+  "schemaVersion": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "taxYear",
+    "issuedAt",
+    "summary",
+    "dgfip",
+    "declarants"
+  ],
+  "properties": {
+    "taxYear": {
+      "type": "integer",
+      "minimum": 1900
+    },
+    "issuedAt": {
+      "type": "string",
+      "format": "date"
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "currency",
+        "rfr",
+        "familyQuotientParts",
+        "grossTax",
+        "creditsTotal",
+        "pasWithheldTotal",
+        "netTax",
+        "balanceDue"
+      ],
+      "properties": {
+        "currency": {
+          "type": "string",
+          "pattern": "^[A-Z]{3}$"
+        },
+        "familyQuotientParts": {
+          "type": "number",
+          "minimum": 0
+        },
+        "rfr": {
+          "type": "number"
+        },
+        "grossTax": {
+          "type": "number"
+        },
+        "creditsTotal": {
+          "type": "number"
+        },
+        "pasWithheldTotal": {
+          "type": "number"
+        },
+        "netTax": {
+          "type": "number"
+        },
+        "balanceDue": {
+          "type": "number"
+        },
+        "schedule": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "date",
+              "amount"
+            ],
+            "properties": {
+              "date": {
+                "type": "string",
+                "format": "date"
+              },
+              "amount": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          }
+        }
+      }
+    },
+    "dgfip": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reference",
+        "verificationService",
+        "managingOffice"
+      ],
+      "properties": {
+        "reference": {
+          "type": "string"
+        },
+        "verificationService": {
+          "type": "string"
+        },
+        "managingOffice": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "country": {
+              "type": "string",
+              "pattern": "^[A-Z]{2}$"
+            }
+          }
+        },
+        "documentRef": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "declarants": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "role",
+          "person",
+          "declaredIncomes"
+        ],
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "PRIMARY",
+              "SPOUSE",
+              "DEPENDENT"
+            ]
+          },
+          "person": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name"
+            ],
+            "properties": {
+              "name": {
+                "type": "object",
+                "required": [
+                  "familyName",
+                  "givenName"
+                ],
+                "properties": {
+                  "givenName": {
+                    "type": "string"
+                  },
+                  "familyName": {
+                    "type": "string"
+                  }
+                }
+              },
+              "dateOfBirth": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date"
+              },
+              "nationalIdentifiers": {
+                "type": "array",
+                "items": {
+                  "$ref": "../../common/identifier.json"
+                }
+              }
+            }
+          },
+          "declaredIncomes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "category",
+                "taxableAmount",
+                "currency"
+              ],
+              "properties": {
+                "category": {
+                  "type": "string",
+                  "enum": [
+                    "SALARIES",
+                    "PENSIONS",
+                    "REPLACEMENT_INCOME",
+                    "RENTAL_INCOME",
+                    "BIC",
+                    "BNC",
+                    "BA",
+                    "CAPITAL_INCOME",
+                    "CAPITAL_GAINS",
+                    "OTHER"
+                  ]
+                },
+                "grossAmount": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "taxableAmount": {
+                  "type": "number"
+                },
+                "currency": {
+                  "type": "string",
+                  "pattern": "^[A-Z]{3}$"
+                },
+                "notes": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "titre": "Type de garantie",
+  "description": "Table de valeur (code/label) pour le type de garantie",
+  "documentationUrl": "https://example.com/docs/normes/CL_TYPE_GARANTIE.json",
+  "version_schema": "v0.0.1",
+  "langue": "fr",
+  "values": [
+    {
+      "code": "CAP",
+      "label": "Nantissement du produit d'épargne"
+    },
+    {
+      "code": "COX",
+      "label": "Consentement expres de l'epoux(se)"
+    },
+    {
+      "code": "NAT",
+      "label": "Nantissement de titre"
+    },
+    {
+      "code": "ORD",
+      "label": "Ordre irrevocable"
+    },
+    {
+      "code": "PAH",
+      "label": "Promesse d'affectation hypothecaire"
+    },
+    {
+      "code": "NAP",
+      "label": "Nantissement de parts"
+    }
+  ]
+}

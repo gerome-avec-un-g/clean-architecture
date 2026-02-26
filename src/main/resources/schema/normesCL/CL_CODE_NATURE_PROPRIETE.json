@@ -1,0 +1,13 @@
+{
+  "titre": "Nature de propriété",
+  "description": "Table de valeur (code/label) pour la nature de propriété",
+  "documentationUrl": "https://example.com/docs/normes/CL_NATURE_PROPRIETE.json",
+  "version_schema": "v0.0.1",
+  "langue": "fr",
+  "values": [
+    {
+      "code": "BRS",
+      "label": "....je ne sais plus... a mettre à jour"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "security/signature.json",
+  "title": "Signature",
+  "schemaVersion": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "EIDAS_QSEAL",
+        "EIDAS_QES",
+        "TECH_SEAL",
+        "OTHER"
+      ]
+    },
+    "algorithm": {
+      "type": "string"
+    },
+    "value": {
+      "type": "string"
+    },
+    "certificateRef": {
+      "type": "string"
+    },
+    "signedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

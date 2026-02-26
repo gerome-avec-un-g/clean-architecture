@@ -1,0 +1,21 @@
+{
+  "titre": "Type de résidence principale",
+  "description": "Table de valeur (code/label) pour le type de résidence principale",
+  "documentationUrl": "https://example.com/docs/normes/CL_CODE_RESIDENCE_PRINCIPALE.json",
+  "version_schema": "v0.0.1",
+  "langue": "fr",
+  "values": [
+    {
+      "code": "PRO",
+      "label": "Proprietaire"
+    },
+    {
+      "code": "LOC",
+      "label": "Locataire"
+    },
+    {
+      "code": "GRA",
+      "label": "Loge a titre gratuit"
+    }
+  ]
+}

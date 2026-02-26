@@ -1,0 +1,73 @@
+{
+  "titre": "Types de revenu",
+  "description": "Table de valeur (code/label) pour les types de revenu",
+  "documentationUrl": "https://example.com/docs/normes/CL_TYPE_REVENU.json",
+  "version_schema": "v0.0.1",
+  "langue": "fr",
+  "values": [
+    {
+      "code": "ALI",
+      "label": "Pension alimentaire"
+    },
+    {
+      "code": "ALO",
+      "label": "Allocations familiales"
+    },
+    {
+      "code": "APL",
+      "label": "A.p.l"
+    },
+    {
+      "code": "ASS",
+      "label": "Assedic"
+    },
+    {
+      "code": "BEN",
+      "label": "Benefices"
+    },
+    {
+      "code": "COM",
+      "label": "Revenus professionnels variables"
+    },
+    {
+      "code": "INV",
+      "label": "Pension d'invalidite"
+    },
+    {
+      "code": "LAP",
+      "label": "Revenus locatifs sur bien objet du pret"
+    },
+    {
+      "code": "LOP",
+      "label": "Revenus locatifs sur patrimoine"
+    },
+    {
+      "code": "PRI",
+      "label": "Primes"
+    },
+    {
+      "code": "RBF",
+      "label": "Remboursement de frais"
+    },
+    {
+      "code": "RET",
+      "label": "Retraite"
+    },
+    {
+      "code": "REV",
+      "label": "Pension de reversion"
+    },
+    {
+      "code": "SAL",
+      "label": "Salaire fixe"
+    },
+    {
+      "code": "TIT",
+      "label": "Total des revenus de placements mobiliers"
+    },
+    {
+      "code": "VIA",
+      "label": "Rente viagere"
+    }
+  ]
+}

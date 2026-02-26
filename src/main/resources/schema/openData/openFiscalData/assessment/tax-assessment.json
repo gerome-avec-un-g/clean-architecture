@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "assessment/tax-assessment.json",
+  "title": "TaxAssessment",
+  "schemaVersion": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "period",
+    "issueDate",
+    "currency",
+    "taxableBase",
+    "grossTax",
+    "netTax"
+  ],
+  "properties": {
+    "period": {
+      "$ref": "../../periods/tax-period.json"
+    },
+    "issueDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "taxableBase": {
+      "type": "number"
+    },
+    "grossTax": {
+      "type": "number"
+    },
+    "creditsTotal": {
+      "type": "number",
+      "default": 0
+    },
+    "pasWithheldTotal": {
+      "type": "number",
+      "default": 0
+    },
+    "netTax": {
+      "type": "number"
+    },
+    "balanceDue": {
+      "type": "number"
+    },
+    "documentRef": {
+      "type": "string"
+    }
+  }
+}

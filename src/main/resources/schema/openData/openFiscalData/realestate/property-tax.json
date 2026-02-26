@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "realestate/property-tax.json",
+  "title": "PropertyTax (Taxes foncières)",
+  "schemaVersion": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "taxYear",
+    "assetRef",
+    "issuedAt",
+    "summary",
+    "issuer"
+  ],
+  "properties": {
+    "taxYear": {
+      "type": "integer",
+      "minimum": 1900
+    },
+    "assetRef": {
+      "type": "string"
+    },
+    "issuedAt": {
+      "type": "string",
+      "format": "date"
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "currency",
+        "totalDue"
+      ],
+      "properties": {
+        "currency": {
+          "type": "string",
+          "pattern": "^[A-Z]{3}$"
+        },
+        "baseCadastrale": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "lines": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "type",
+              "amount"
+            ],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "TFPB",
+                  "TFPNB",
+                  "TEOM",
+                  "TSE",
+                  "OTHER"
+                ]
+              },
+              "authority": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "rate": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "amount": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          }
+        },
+        "exemptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fees": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "totalDue": {
+          "type": "number"
+        },
+        "schedule": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "date",
+              "amount"
+            ],
+            "properties": {
+              "date": {
+                "type": "string",
+                "format": "date"
+              },
+              "amount": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          }
+        }
+      }
+    },
+    "issuer": {
+      "$ref": "../../common/entity-ref.json"
+    },
+    "dgfip": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "reference": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "documentRef": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

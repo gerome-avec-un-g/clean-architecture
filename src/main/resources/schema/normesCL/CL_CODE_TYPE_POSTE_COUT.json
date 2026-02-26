@@ -1,0 +1,33 @@
+{
+  "titre": "Type poste coût",
+  "description": "Table de valeur (code/label) pour les postes de coût",
+  "documentationUrl": "https://example.com/docs/normes/CL_TYPE_POSTE_COUT.json",
+  "version_schema": "v0.0.1",
+  "langue": "fr",
+  "values": [
+    {
+      "code": "ACQ",
+      "label": "Acquisition"
+    },
+    {
+      "code": "CON",
+      "label": "Construction"
+    },
+    {
+      "code": "FRA",
+      "label": "Frais"
+    },
+    {
+      "code": "RAC",
+      "label": "Rachat creance"
+    },
+    {
+      "code": "TER",
+      "label": "Terrain"
+    },
+    {
+      "code": "TVX",
+      "label": "Travaux"
+    }
+  ]
+}

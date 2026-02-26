@@ -1,0 +1,202 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "realestate/property-asset.json",
+  "title": "PropertyAsset (Bien immobilier)",
+  "schemaVersion": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "assetId",
+    "type",
+    "usage",
+    "address",
+    "ownership"
+  ],
+  "properties": {
+    "assetId": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "HOUSE",
+        "APARTMENT",
+        "PARKING",
+        "LAND",
+        "COMMERCIAL",
+        "INDUSTRIAL",
+        "OTHER"
+      ]
+    },
+    "usage": {
+      "type": "string",
+      "enum": [
+        "PRIMARY_RESIDENCE",
+        "SECONDARY_RESIDENCE",
+        "RENTAL",
+        "VACANT",
+        "PROFESSIONAL",
+        "AGRICULTURAL",
+        "OTHER"
+      ]
+    },
+    "address": {
+      "$ref": "../../common/postal-address.json"
+    },
+    "cadastral": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "communeCode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "section": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 4
+        },
+        "parcelNumber": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 6
+        },
+        "lotNumber": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "characteristics": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "surfaceHabitableM2": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "surfaceParcelleM2": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "rooms": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "constructionYear": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1700,
+          "maximum": 2100
+        }
+      }
+    },
+    "ownership": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rightType",
+        "share",
+        "holders"
+      ],
+      "properties": {
+        "rightType": {
+          "type": "string",
+          "enum": [
+            "FULL_OWNERSHIP",
+            "USUFRUCT",
+            "BARE_OWNERSHIP",
+            "LEASEHOLD",
+            "OTHER"
+          ]
+        },
+        "share": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "holders": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "nationalIdentifiers": {
+                "type": "array",
+                "items": {
+                  "$ref": "../../common/identifier.json"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "acquisition": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "price": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "currency": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[A-Z]{3}$"
+        },
+        "notary": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "dvfReference": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Référence DVF/acte"
+        }
+      }
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

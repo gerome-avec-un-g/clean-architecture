@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "incomes/income-item.json",
+  "title": "IncomeItem",
+  "schemaVersion": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "period",
+    "category",
+    "grossAmount",
+    "currency"
+  ],
+  "properties": {
+    "period": {
+      "$ref": "../../periods/tax-period.json"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "SALARIES",
+        "PENSIONS",
+        "REPLACEMENT_INCOME",
+        "RENTAL_INCOME",
+        "BIC",
+        "BNC",
+        "BA",
+        "CAPITAL_INCOME",
+        "CAPITAL_GAINS",
+        "OTHER"
+      ]
+    },
+    "payer": {
+      "$ref": "../../common/entity-ref.json"
+    },
+    "grossAmount": {
+      "type": "number",
+      "format": "double"
+    },
+    "taxableAmount": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "format": "double"
+    },
+    "currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "pasWithheld": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

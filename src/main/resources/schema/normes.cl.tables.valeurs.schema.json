@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "normes.cl.tables.schema.json",
+  "title": "Schéma pour une norme Crédit Logemenent (valeurs code + libellé)",
+  "schemaVersion": "1.00.00-SNAPSHOT",
+  "description": "Schéma décrivant un fichier de norme contenant une liste de valeurs codées avec leur libellé.",
+  "type": "object",
+  "required": [
+    "titre",
+    "description",
+    "version_schema",
+    "langue",
+    "values"
+  ],
+  "properties": {
+    "titre": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Titre lisible de la norme."
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Description courte de la norme."
+    },
+    "documentationUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL vers la documentation complète (optionnel)."
+    },
+    "version_schema": {
+      "type": "string",
+      "description": "Version du schéma du fichier (ex: v0.0.1)."
+    },
+    "langue": {
+      "type": "string",
+      "minLength": 2,
+      "description": "Langue du contenu (ex: fr)."
+    },
+    "note": {
+      "type": "string",
+      "description": "Note ou remarque optionnelle sur la valeur."
+    },
+    "values": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "$ref": "#/$defs/ValueEntry"
+      },
+      "description": "Liste des valeurs de la norme, chaque valeur contient un `code` et un `label` (libellé)."
+    }
+  },
+  "$defs": {
+    "ValueEntry": {
+      "type": "object",
+      "required": [
+        "code",
+        "label"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Valeur de code (identifiant)"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Libellé lisible associé au code."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description optionnelle de la valeur."
+        }
+      },
+      "additionalProperties": false,
+      "description": "Entrée simple décrivant une valeur de la norme (code + libellé)."
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "titre": "Périodicité",
+      "description": "Table de valeur des périodicités",
+      "version_schema": "v1.0.0",
+      "langue": "fr",
+      "values": [
+        {
+          "code": "M",
+          "label": "Mensuel"
+        },
+        {
+          "code": "T",
+          "label": "Trimestriel",
+          "description": "La périodicité Trimestriel n'est plus utilisée dans la pratique"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "titre": "Type de personne morale",
+  "description": "Table de valeur (code/label) pour le type de personne morale",
+  "documentationUrl": "https://example.com/docs/normes/CL_TYPE_PERSONNE_MORALE.json",
+  "version_schema": "v0.0.1",
+  "langue": "fr",
+  "values": [
+    {
+      "code": "SCI",
+      "label": "Société Civile Immobilière"
+    }
+  ]
+}

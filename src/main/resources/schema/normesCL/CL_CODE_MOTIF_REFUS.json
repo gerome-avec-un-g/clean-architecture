@@ -1,0 +1,351 @@
+{
+  "titre": "Codes de refus",
+  "description": "Table de valeur (code/label) pour les codes de refus",
+  "documentationUrl": "https://example.com/docs/normes/CL_CODE_REFUS.json",
+  "version_schema": "v0.0.1",
+  "langue": "fr",
+    "note": "⚠️ Cette table doit être revue par la MOA",
+
+  "values": [
+    {
+      "code": "101",
+      "label": "l'importance de l'endettement."
+    },
+    {
+      "code": "102",
+      "label": "l'importance des aides sociales dans les revenus."
+    },
+    {
+      "code": "103",
+      "label": "le caractère aléatoire d'une partie des revenus."
+    },
+    {
+      "code": "104",
+      "label": "la faiblesse du revenu résiduel."
+    },
+    {
+      "code": "105",
+      "label": "le manque d'ancienneté professionnelle de l'emprunteur."
+    },
+    {
+      "code": "106",
+      "label": "l'importance du taux d'endettement due au caractère aléatoire d'une partie des revenus."
+    },
+    {
+      "code": "107",
+      "label": "l'importance de l'endettement au regard du revenu disponible."
+    },
+    {
+      "code": "108",
+      "label": "l'importance de la caution dans l'analyse de la solvabilité du dossier."
+    },
+    {
+      "code": "109",
+      "label": "la solvabilité insuffisante de la caution."
+    },
+    {
+      "code": "110",
+      "label": "le fait que l'un des intervenants est en période d'essai."
+    },
+    {
+      "code": "111",
+      "label": "les raisons évoquées lors de notre entretien téléphonique."
+    },
+    {
+      "code": "112",
+      "label": "l'importance de l'endettement au regard des caractéristiques du prêt (taux variable et durée d'amortissement)."
+    },
+    {
+      "code": "113",
+      "label": "l'importance des revenus locatifs dans la solvabilité du dossier."
+    },
+    {
+      "code": "201",
+      "label": "l'insuffisance de l'apport personnel en fonds propres dans le plan de financement, hors frais."
+    },
+    {
+      "code": "202",
+      "label": "l'absence d'apport personnel en fonds propres dans le plan de financement, hors frais."
+    },
+    {
+      "code": "203",
+      "label": "le fait que le montant du crédit relais excède les limites de notre intervention."
+    },
+    {
+      "code": "204",
+      "label": "l'importance de l'encours sur le bien objet de l'opération."
+    },
+    {
+      "code": "205",
+      "label": "le fait que les intervenants au dossier ne réunissent pas la pleine propriété du bien financé."
+    },
+    {
+      "code": "206",
+      "label": "la durée d'amortissement du prêt à garantir."
+    },
+    {
+      "code": "207",
+      "label": "l'endettement hypothécaire sur le bien financé."
+    },
+    {
+      "code": "208",
+      "label": "la valeur du bien financé."
+    },
+    {
+      "code": "209",
+      "label": "la durée du prêt s'agissant du seul financement d'un terrain."
+    },
+    {
+      "code": "210",
+      "label": "les raisons évoquées lors de notre entretien téléphonique."
+    },
+    {
+      "code": "211",
+      "label": "la faible valeur du bien rapportée au montant du prêt à garantir."
+    },
+    {
+      "code": "212",
+      "label": "la durée de la franchise du prêt à 0% qui excède celle du prêt le plus long de l'opération."
+    },
+    {
+      "code": "213",
+      "label": "l'importance des travaux rapportée à la valeur du bien objet de l'opération."
+    },
+    {
+      "code": "214",
+      "label": "le montant du financement qui est supérieur au coût total de l'opération hors frais."
+    },
+    {
+      "code": "215",
+      "label": "l'insuffisance du produit adossé pour couvrir à terme le prêt initial."
+    },
+    {
+      "code": "216",
+      "label": "l'objet de l'opération : opération de défiscalisation sans patrimoine net suffisant."
+    },
+    {
+      "code": "217",
+      "label": "le fait que les intervenants au dossier ne réunissent pas la pleine propriété du bien en vente."
+    },
+    {
+      "code": "218",
+      "label": "l'absence d'apport personnel en fonds propres hors frais compte tenu de la nature de l'opération et de la durée des prêts du plan de financement."
+    },
+    {
+      "code": "219",
+      "label": "le montant de l'apport personnel en fonds propres hors frais compte tenu de la nature de l'opération et de la durée des prêts du plan de financement."
+    },
+    {
+      "code": "301",
+      "label": "l'objet de l'opération qui n'entre pas dans notre domaine d'intervention."
+    },
+    {
+      "code": "302",
+      "label": "la présence d'un rachat de crédit à la consommation dans le prêt à garantir."
+    },
+    {
+      "code": "303",
+      "label": "la nature de l'opération."
+    },
+    {
+      "code": "304",
+      "label": "le fait que Crédit Logement ne peut intervenir en garantie partielle sur un prêt."
+    },
+    {
+      "code": "305",
+      "label": "l'objet de l'opération qui n'entre pas dans notre domaine d'intervention : bien à usage partiellement professionnel."
+    },
+    {
+      "code": "306",
+      "label": "l'objet de l'opération qui n'entre pas dans notre domaine d'intervention."
+    },
+    {
+      "code": "307",
+      "label": "l'objet de l'opération qui n'entre pas dans notre domaine d'intervention."
+    },
+    {
+      "code": "308",
+      "label": "l'objet de l'opération qui n'entre pas dans notre domaine d'intervention : local commercial."
+    },
+    {
+      "code": "309",
+      "label": "l'objet de l'opération qui n'entre pas dans notre domaine d'intervention : travaux réalisés par l'emprunteur lui-même."
+    },
+    {
+      "code": "310",
+      "label": "l'objet de l'opération qui n'entre pas dans notre domaine d'intervention."
+    },
+    {
+      "code": "311",
+      "label": "la localisation du bien financé qui n'entre pas dans notre périmètre d'intervention."
+    },
+    {
+      "code": "312",
+      "label": "l'objet de l'opération qui ne rentre pas dans notre domaine d'intervention."
+    },
+    {
+      "code": "313",
+      "label": "l'objet de l'opération qui n'entre pas dans notre domaine d'intervention : remboursement annuel ou semestriel."
+    },
+    {
+      "code": "314",
+      "label": "la localisation du bien financé qui n'entre pas dans notre périmètre d'intervention."
+    },
+    {
+      "code": "401",
+      "label": "l'importance de l'endettement et l'absence d'apport personnel en deniers propres et hors frais dans le plan de financement."
+    },
+    {
+      "code": "402",
+      "label": "l'endettement et la faiblesse de l'apport personnel en deniers propres et hors frais dans le plan de financement."
+    },
+    {
+      "code": "403",
+      "label": "l'importance de l'endettement et de l'encours sur le bien objet de l'opération."
+    },
+    {
+      "code": "501",
+      "label": "notre analyse de risque négative."
+    },
+    {
+      "code": "502",
+      "label": "notre analyse de risque négative."
+    },
+    {
+      "code": "503",
+      "label": "notre analyse de risque négative, conformément à notre entretien téléphonique."
+    },
+    {
+      "code": "504",
+      "label": "notre analyse de risque négative, conformément à notre entretien téléphonique."
+    },
+    {
+      "code": "601",
+      "label": "les raisons évoquées lors de notre entretien téléphonique."
+    },
+    {
+      "code": "602",
+      "label": "l'analyse de solvabilité du fait des restrictions émises par la compagnie d'assurance."
+    },
+    {
+      "code": "603",
+      "label": "l'analyse de solvabilité du fait de l'absence d'assurance sur l'opération."
+    },
+    {
+      "code": "604",
+      "label": "l'analyse de solvabilité du fait de l'insuffisance de couverture des emprunteurs par la compagnie d'assurance."
+    },
+    {
+      "code": "605",
+      "label": "l'analyse de solvabilité du fait de la non assurabilité de l'un des emprunteurs jusqu'au terme du prêt."
+    },
+    {
+      "code": "606",
+      "label": "la souscription d'une délégation d'assurance extérieure."
+    },
+    {
+      "code": "607",
+      "label": "la mauvaise répartition de la couverture d'assurance."
+    },
+    {
+      "code": "750",
+      "label": "Le refus du système expert"
+    },
+    {
+      "code": "751",
+      "label": "A revoir - Système expert"
+    },
+    {
+      "code": "752",
+      "label": "Indeterminé - Système expert"
+    },
+    {
+      "code": "801",
+      "label": "l'importance de l'endettement et des aides sociales."
+    },
+    {
+      "code": "802",
+      "label": "l'importance de l'endettement lié au caractère aléatoire d'une partie des revenus."
+    },
+    {
+      "code": "803",
+      "label": "le rapport de l'endettement au revenu disponible."
+    },
+    {
+      "code": "804",
+      "label": "l'importance de l'endettement sans tenir compte des revenus de l'individu en période d'essai."
+    },
+    {
+      "code": "805",
+      "label": "le rapport de l'endettement aux revenus assurés ou assurables."
+    },
+    {
+      "code": "806",
+      "label": "l'importance de l'endettement, l'opération ne pouvant reposer sur la solvabilité exclusive de la (les) caution(s)."
+    },
+    {
+      "code": "807",
+      "label": "l'importance de l'endettement et le montant de l'apport personnel en fonds propres hors frais dans le plan de financement."
+    },
+    {
+      "code": "808",
+      "label": "l'importance de l'endettement et l'absence d'apport personnel en fonds propres hors frais dans le plan de financement."
+    },
+    {
+      "code": "809",
+      "label": "l'importance de l'endettement jusqu'à la réalisation définitive du bien mis en vente."
+    },
+    {
+      "code": "810",
+      "label": "l'importance de l'endettement au regard de la durée d'amortissement des prêts du plan de financement."
+    },
+    {
+      "code": "811",
+      "label": "l'importance de l'endettement et de l'encours grevant le bien objet de l'opération."
+    },
+    {
+      "code": "812",
+      "label": "la faiblesse de l'apport personnel en fonds propres et l'importance de l'encours grevant le patrimoine."
+    },
+    {
+      "code": "813",
+      "label": "l'absence d'apport personnel en fonds propres hors frais et l'importance de l'encours grevant le patrimoine."
+    },
+    {
+      "code": "814",
+      "label": "le montant de l'apport personnel en fonds propres hors frais et la durée d'amortissement des prêts du plan de financement."
+    },
+    {
+      "code": "815",
+      "label": "l'absence d'apport personnel en fonds propres hors frais et la durée d'amortissement des prêts du plan de financement."
+    },
+    {
+      "code": "816",
+      "label": "le montant de l'apport personnel en fonds propres hors frais et l'importance de la créance hypothécaire sur le bien objet de l'opération."
+    },
+    {
+      "code": "817",
+      "label": "l'absence d'apport personnel en fonds propres hors frais et l'importance de la créance hypothécaire sur le bien objet de l'opération."
+    },
+    {
+      "code": "818",
+      "label": "le montant de l'apport personnel en fonds propres hors frais compte tenu de la nature de l'opération."
+    },
+    {
+      "code": "819",
+      "label": "l'absence d'apport personnel en fonds propres hors frais compte tenu de la nature de l'opération."
+    },
+    {
+      "code": "901",
+      "label": "-NR-"
+    },
+    {
+      "code": "902",
+      "label": "-NR-"
+    },
+    {
+      "code": "999",
+      "label": "Reprise - Plan de contournement"
+    }
+  ]
+}

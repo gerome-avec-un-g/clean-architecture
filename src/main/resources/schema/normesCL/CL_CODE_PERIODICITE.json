@@ -1,0 +1,25 @@
+{
+  "titre": "Périodicité",
+  "description": "Table de valeur (code/label) pour la périodicité MTSA",
+  "documentationUrl": "https://example.com/docs/normes/CL_PERIODICITE.json",
+  "version_schema": "v0.0.1",
+  "langue": "fr",
+  "values": [
+    {
+      "code": "M",
+      "label": "Mensuelle"
+    },
+    {
+      "code": "A",
+      "label": "Annuelle"
+    },
+    {
+      "code": "T",
+      "label": "Trimestrielle"
+    },
+    {
+      "code": "S",
+      "label": "Semestrielle"
+    }
+  ]
+}

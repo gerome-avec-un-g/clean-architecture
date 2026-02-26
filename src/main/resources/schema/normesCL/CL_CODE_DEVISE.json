@@ -1,0 +1,17 @@
+{
+  "titre": "Liste des devises",
+  "description": "Table de valeur (code/label) pour la liste des devises",
+  "documentationUrl": "https://example.com/docs/normes/CL_DEVISE.json",
+  "version_schema": "v0.0.1",
+  "langue": "fr",
+  "values": [
+    {
+      "code": "EUR",
+      "label": "Euro"
+    },
+    {
+      "code": "CHF",
+      "label": "Franc suisse"
+    }
+  ]
+}

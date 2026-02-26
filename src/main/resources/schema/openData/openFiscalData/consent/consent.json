@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "consent/consent.json",
+  "title": "Consent (FIDA)",
+  "schemaVersion": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "consentId",
+    "purpose",
+    "grantedAt",
+    "expiresAt",
+    "scopes"
+  ],
+  "properties": {
+    "consentId": {
+      "type": "string",
+      "maxLength": 140
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 40
+    },
+    "grantedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expiresAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "revokedAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "scopes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": [
+          "IDENTITY",
+          "INCOME",
+          "WITHHOLDING",
+          "DEDUCTIONS",
+          "CREDITS",
+          "ASSESSMENTS",
+          "DOCUMENTS",
+          "REAL_ESTATE",
+          "PROPERTY_TAX"
+        ]
+      }
+    },
+    "dataMinimization": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

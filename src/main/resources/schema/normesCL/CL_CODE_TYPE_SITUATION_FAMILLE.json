@@ -1,0 +1,53 @@
+{
+  "titre": "Situation familiale",
+  "description": "Table de valeur (code/label) pour la situation familiale",
+  "documentationUrl": "https://example.com/docs/normes/CL_SITUATION_FAMILLE.json",
+  "version_schema": "v0.0.1",
+  "langue": "fr",
+  "values": [
+    {
+      "code": "C",
+      "label": "Celibataire"
+    },
+    {
+      "code": "D",
+      "label": "Divorce"
+    },
+    {
+      "code": "IC",
+      "label": "Instance de divorce regime communautaire"
+    },
+    {
+      "code": "IS",
+      "label": "Instance de divorce regime de separation"
+    },
+    {
+      "code": "MC",
+      "label": "Marie en communaute"
+    },
+    {
+      "code": "MS",
+      "label": "Marie en separation de biens"
+    },
+    {
+      "code": "S",
+      "label": "Separe"
+    },
+    {
+      "code": "SC",
+      "label": "Separe en communaute"
+    },
+    {
+      "code": "SS",
+      "label": "Separe en separation de biens"
+    },
+    {
+      "code": "U",
+      "label": "Union libre"
+    },
+    {
+      "code": "V",
+      "label": "Veuf"
+    }
+  ]
+}

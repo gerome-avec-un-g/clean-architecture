@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "open_banking.schema.json",
+  "title": "Open Banking (placeholder)",
+  "description": "Schéma externe placeholder pour données Open Banking. À compléter selon les besoins.",
+  "schemaVersion": "1.00.00-SNAPSHOT",
+  "type": "object",
+  "additionalProperties": true,
+  "$comment": "Schema placeholder créé automatiquement le 2026-02-04"
+}

@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "adresse.schema.json",
+  "title": "Adresse",
+  "description": "Structure d'une adresse",
+  "schemaVersion": "1.00.00-SNAPSHOT",
+  "type": "object",
+  "properties": {
+    "rue": {
+      "type": "array",
+      "description": "Lignes d'adresse.",
+      "minItems": 0,
+      "maxItems": 3,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 255
+      },
+      "examples": [
+        ["25 rue de la République"],
+        ["12 rue de la Paix", "Bâtiment B"],
+        ["12 rue de la Paix", "Bâtiment B", "Appartement 42"]
+      ]
+    },
+    "codePostal": {
+      "type": "string",
+      "description": "Code postal",
+      "pattern": "^[0-9]{5}$"
+    },
+    "codeInseeCommune": {
+      "type": "string",
+      "description": "Code INSEE de la commune (format DDCCC : DD = numéro du département sur 2 chiffres, CCC = numéro de la commune dans le département sur 3 chiffres)",
+      "pattern": "^[0-9]{5}$",
+      "examples": [
+        "75056",
+        "44109",
+        "13055",
+        "69123"
+      ]
+    },
+    "ville": {
+      "type": "string",
+      "description": "Ville",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "pays": {
+      "type": "object",
+      "required": ["code", "norme"],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Code pays selon la norme spécifiée",
+          "minLength": 2,
+          "maxLength": 3,
+          "pattern": "^[A-Z]{2,3}$"
+        },
+        "norme": {
+          "$ref": "normes.schema.json#/$defs/normesCodePays"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "rue": [],
+      "codePostal": "75011",
+      "codeInseeCommune": "75056",
+      "ville": "Paris",
+      "pays": {
+        "code": "FR",
+        "norme": "ISO_3166_1_ALPHA_2"
+      }
+    },
+    {
+      "rue": ["25 rue de la République"],
+      "codePostal": "75011",
+      "codeInseeCommune": "75056",
+      "ville": "Paris",
+      "pays": {
+        "code": "FR",
+        "norme": "ISO_3166_1_ALPHA_2"
+      }
+    },
+    {
+      "rue": [
+        "45 boulevard Haussmann",
+        "Étage 3"
+      ],
+      "codePostal": "75009",
+      "codeInseeCommune": "75056",
+      "ville": "Paris",
+      "pays": {
+        "code": "FR",
+        "norme": "ISO_3166_1_ALPHA_2"
+      }
+    },
+    {
+      "rue": [
+        "56 rue du Commerce",
+        "Bâtiment A",
+        "Appt 305"
+      ],
+      "codePostal": "44100",
+      "codeInseeCommune": "44109",
+      "ville": "Nantes",
+      "pays": {
+        "code": "FR",
+        "norme": "ISO_3166_1_ALPHA_2"
+      }
+    }
+  ]
+}

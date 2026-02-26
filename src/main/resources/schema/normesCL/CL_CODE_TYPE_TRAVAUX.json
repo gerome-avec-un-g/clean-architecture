@@ -1,0 +1,21 @@
+{
+  "titre": "Codes travaux",
+  "description": "Table de valeur (code/label) pour les codes de travaux",
+  "documentationUrl": "https://example.com/docs/normes/CL_CODE_TRAVAUX.json",
+  "version_schema": "v0.0.1",
+  "langue": "fr",
+  "values": [
+    {
+      "code": "AGC",
+      "label": "Travaux d'agrandissement/construction"
+    },
+    {
+      "code": "ECE",
+      "label": "Travaux de rénovation énergétique"
+    },
+    {
+      "code": "AME",
+      "label": "Travaux d'amélioration"
+    }
+  ]
+}

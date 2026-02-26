@@ -1,0 +1,43 @@
+{
+  "titre": "Classement DPE/GES",
+  "description": "Table de valeur (code/label) pour le classement DPE/GES",
+  "documentationUrl": "https://example.com/docs/normes/CL_CLASSEMENT_DPE_GES.json",
+  "version_schema": "v0.0.1",
+  "langue": "fr",
+  "values": [
+    {
+      "code": "A",
+      "label": "A"
+    },
+    {
+      "code": "B",
+      "label": "B"
+    },
+    {
+      "code": "C",
+      "label": "C"
+    },
+    {
+      "code": "D",
+      "label": "D"
+    },
+    {
+      "code": "E",
+      "label": "E"
+    },
+    {
+      "code": "F",
+      "label": "F"
+    },
+    {
+      "code": "G",
+      "label": "G"
+    },
+    {
+      "code": "Z",
+      "label": "Z (inconnu / non applicable)",
+      "description": "Est ce que cela a toujours du sens de reprendre cette valeur ?"
+
+    }
+  ]
+}

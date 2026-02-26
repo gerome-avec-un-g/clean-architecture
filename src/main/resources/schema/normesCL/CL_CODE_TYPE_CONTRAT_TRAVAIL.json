@@ -1,0 +1,25 @@
+{
+  "titre": "Type de contrat de travail",
+  "description": "Table de valeur (code/label) pour le type de contrat de travail",
+  "documentationUrl": "https://example.com/docs/normes/CL_TYPE_CONTRAT_TRAVAIL.json",
+  "version_schema": "v0.0.1",
+  "langue": "fr",
+  "values": [
+    {
+      "code": "CDD",
+      "label": "Contrat à durée déterminée'"
+    },
+    {
+      "code": "CDI",
+      "label": "Contrat à durée indéterminée"
+    },
+    {
+      "code": "CON",
+      "label": "Contractuel"
+    },
+    {
+      "code": "VAC",
+      "label": "Vacataire"
+    }
+  ]
+}

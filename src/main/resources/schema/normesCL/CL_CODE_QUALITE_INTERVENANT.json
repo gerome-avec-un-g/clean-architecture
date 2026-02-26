@@ -1,0 +1,17 @@
+{
+  "titre": "Qualité intervenant",
+  "description": "Table de valeur (code/label) pour la qualité de l'intervenant",
+  "documentationUrl": "https://example.com/docs/normes/CL_QUALITE_INTERVENANT.json",
+  "version_schema": "v0.0.1",
+  "langue": "fr",
+  "values": [
+    {
+      "code": "EMP",
+      "label": "Emprunteur"
+    },
+    {
+      "code": "CAU",
+      "label": "Caution"
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "titre": "Nature de l'opération",
+  "description": "Table de valeur (code/label) pour la nature de l'opération",
+  "documentationUrl": "https://example.com/docs/normes/CL_CODE_NATURE_OPERATION.json",
+  "version_schema": "v0.0.1",
+  "langue": "fr",
+  "values": [
+    {
+      "code": "ACO",
+      "label": "Acquisition terrain et construction"
+    },
+    {
+      "code": "ACR",
+      "label": "Terrain construction et rachat creance"
+    },
+    {
+      "code": "AQA",
+      "label": "Acquisition d'ancien"
+    },
+    {
+      "code": "AQN",
+      "label": "Acquisition neuf"
+    },
+    {
+      "code": "ARA",
+      "label": "Acquisition ancien et rachat de creance"
+    },
+    {
+      "code": "ARN",
+      "label": "Acquisition neuf et rachat de creance"
+    },
+    {
+      "code": "ATR",
+      "label": "Acquisition travaux et rachat de creance"
+    },
+    {
+      "code": "ATV",
+      "label": "Acquisition et travaux"
+    },
+    {
+      "code": "CON",
+      "label": "Construction"
+    },
+    {
+      "code": "COR",
+      "label": "Construction et rachat de creance"
+    },
+    {
+      "code": "COS",
+      "label": "Construction et rachat de soulte"
+    },
+    {
+      "code": "RAC",
+      "label": "Rachat de pret"
+    },
+    {
+      "code": "RSO",
+      "label": "Rachat de soulte et rachat de creance"
+    },
+    {
+      "code": "SCP",
+      "label": "Acquisition de parts de scpi"
+    },
+    {
+      "code": "SOU",
+      "label": "Rachat de soulte"
+    },
+    {
+      "code": "TRC",
+      "label": "Travaux et rachat de creance"
+    },
+    {
+      "code": "TSO",
+      "label": "Travaux et rachat de soulte"
+    },
+    {
+      "code": "TVX",
+      "label": "Travaux"
+    }
+  ]
+}

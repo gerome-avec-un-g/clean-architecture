@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "openFiscalData.schema.json",
+  "title": "FiscalDataPackage (FIDA/ISO harmonisé, pré-FDSS) v1",
+  "schemaVersion": "1.0.0",
+  "description": "Schéma JSON décrivant la structure des données fiscales agrégées issues de l'open data, utilisées pour enrichir les dossiers de demande de garantie.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profile",
+    "version",
+    "consent",
+    "taxpayer",
+    "periods"
+  ],
+  "properties": {
+    "profile": {
+      "type": "string",
+      "const": "FIDA-Fiscal-ISO-v1"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-rc[0-9]+)?$"
+    },
+    "jurisdiction": {
+      "type": "string",
+      "pattern": "^[A-Z]{2}$"
+    },
+    "consent": {
+      "$ref": "consent/consent.json"
+    },
+    "dataHolder": {
+      "$ref": "common/entity-ref.json"
+    },
+    "dataUser": {
+      "$ref": "common/entity-ref.json"
+    },
+    "taxpayer": {
+      "$ref": "taxpayer/taxpayer.json"
+    },
+    "taxResidencies": {
+      "type": "array",
+      "items": {
+        "$ref": "taxpayer/tax-residency.json"
+      }
+    },
+    "periods": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "periods/tax-period.json"
+      }
+    },
+    "incomes": {
+      "type": "array",
+      "items": {
+        "$ref": "incomes/income-item.json"
+      }
+    },
+    "withholdingsPAS": {
+      "type": "array",
+      "items": {
+        "$ref": "pas/withholding.json"
+      }
+    },
+    "deductions": {
+      "type": "array",
+      "items": {
+        "$ref": "deductions/deduction-item.json"
+      }
+    },
+    "taxCredits": {
+      "type": "array",
+      "items": {
+        "$ref": "credits/tax-credit-item.json"
+      }
+    },
+    "assessments": {
+      "type": "array",
+      "items": {
+        "$ref": "assessment/tax-assessment.json"
+      }
+    },
+    "documents": {
+      "type": "array",
+      "items": {
+        "$ref": "documents/document-ref.json"
+      }
+    },
+    "latestTaxAssessment": {
+      "$ref": "assessment/latest-tax-assessment.json"
+    },
+    "propertyAssets": {
+      "type": "array",
+      "items": {
+        "$ref": "realestate/property-asset.json"
+      }
+    },
+    "propertyTaxes": {
+      "type": "array",
+      "items": {
+        "$ref": "realestate/property-tax.json"
+      }
+    },
+    "provenance": {
+      "$ref": "provenance/provenance.json"
+    },
+    "signatures": {
+      "type": "array",
+      "items": {
+        "$ref": "security/signature.json"
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "titre": "Mode de remboursement",
+  "description": "Table de valeur (code/label) pour le mode de remboursement",
+  "documentationUrl": "https://example.com/docs/normes/CL_MODE_REMBOURSEMENT.json",
+  "version_schema": "v0.0.1",
+  "langue": "fr",
+  "values": [
+    {
+      "code": "CST",
+      "label": "Constant"
+    },
+    {
+      "code": "DEG",
+      "label": "Degressif"
+    },
+    {
+      "code": "FIN",
+      "label": "In fine"
+    },
+    {
+      "code": "MOD",
+      "label": "Modulable"
+    },
+    {
+      "code": "PRO",
+      "label": "Progressif"
+    }
+  ]
+}

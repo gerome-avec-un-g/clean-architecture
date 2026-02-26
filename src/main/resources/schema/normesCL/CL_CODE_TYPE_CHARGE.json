@@ -1,0 +1,37 @@
+{
+  "titre": "Types de charge",
+  "description": "Table de valeur (code/label) pour les types de charge",
+  "documentationUrl": "https://example.com/docs/normes/CL_TYPE_CHARGE.json",
+  "version_schema": "v0.0.1",
+  "langue": "fr",
+  "values": [
+    {
+      "code": "ALI",
+      "label": "Pension alimentaire"
+    },
+    {
+      "code": "CSM",
+      "label": "Charges de pret consommation"
+    },
+    {
+      "code": "LOY",
+      "label": "Charge de loyer si conserve"
+    },
+    {
+      "code": "PIP",
+      "label": "Charge de pret immobilier en cours"
+    },
+    {
+      "code": "PIV",
+      "label": "Charge de pret immobilier sur bien en vente"
+    },
+    {
+      "code": "REV",
+      "label": "Revolving"
+    },
+    {
+      "code": "VIA",
+      "label": "Rente viagere versee"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "account.schema.json",
+  "title": "Account (Aggregated/Internal, Open Banking)",
+  "schemaVersion": "1.0.0",
+  "description": "Structure d'un compte bancaire agrégé issu de l'open banking, utilisé pour enrichir les dossiers de demande de garantie.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "resourceId": {
+      "type": "string",
+      "description": "Identifiant technique unique du compte tel que fourni par la banque en ligne ou l'agrégateur (par exemple un identifiant interne ou un UUID).",
+      "examples": ["8f3a7c2b-9d41-4c1e-92a1-1234567890ab", "acc_00123456789"]
+    },
+    "name": {
+      "type": "string",
+      "description": "Libellé du compte tel qu'il apparaît dans la banque en ligne ou dans l'interface de l'agrégateur.",
+      "examples": ["Compte courant joint", "Livret A Marie"]
+    },
+    "product": {
+      "type": "string",
+      "description": "Nom commercial ou type de produit bancaire auquel le compte est rattaché.",
+      "examples": ["Compte courant", "Compte joint", "Livret A", "Compte épargne logement"]
+    },
+    "iban": {
+      "type": "string",
+      "description": "IBAN complet du compte lorsque celui-ci est disponible.",
+      "examples": ["FR7612345678901234567890185"]
+    },
+    "maskedPan": {
+      "type": "string",
+      "pattern": "^[0-9]{6}[X*]{1,12}[0-9]{4}$",
+      "description": "Numéro de carte masqué associé au compte, lorsque le compte est une carte (par exemple pour un compte de type CARD).",
+      "examples": ["4974********1234"]
+    },
+    "bban": {
+      "type": "string",
+      "pattern": "^[A-Z0-9]{1,30}$",
+      "description": "BBAN (Basic Bank Account Number) ou numéro de compte national, le cas échéant.",
+      "examples": ["12345678901"]
+    },
+    "currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$",
+      "description": "Devise du compte au format ISO 4217 (3 lettres majuscules).",
+      "examples": ["EUR", "USD", "GBP"]
+    },
+    "cashAccountType": {
+      "type": "string",
+      "enum": ["CACC","SVGS","CARD","LOAN","CDCA"],
+      "description": "Type de compte selon la norme Open Banking / Berlin Group : CACC = compte courant, SVGS = compte d'épargne, CARD = compte carte, LOAN = compte de prêt, CDCA = compte de dépôt à terme.",
+      "examples": ["CACC", "SVGS"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["enabled","disabled","deleted"],
+      "description": "Statut technique du compte dans la source open banking : enabled = actif, disabled = désactivé, deleted = supprimé/fermé.",
+      "examples": ["enabled"]
+    },
+    "psuStatus": {
+      "type": "string",
+      "enum": ["holder","co-holder","attorney"],
+      "description": "Rôle du PSU (Payment Service User) par rapport au compte : holder = titulaire, co-holder = co-titulaire, attorney = mandataire/procuration.",
+      "examples": ["holder", "co-holder"]
+    },
+    "balances": {
+      "type": "array",
+      "description": "Liste des soldes associés au compte (solde courant, disponible, etc.), tels que fournis par la source open banking.",
+      "items": { "$ref": "items/balance.schema.json"}
+    },
+    "transactions": {
+      "type": "array",
+      "description": "Liste des opérations bancaires agrégées pour ce compte.",
+      "items": { "$ref": "items/transaction.schema.json"}
+    }
+  },
+  "required": ["resourceId","currency","product","cashAccountType","status"]
+}

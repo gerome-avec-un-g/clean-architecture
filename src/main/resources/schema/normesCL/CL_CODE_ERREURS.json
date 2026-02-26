@@ -1,0 +1,14 @@
+{
+  "titre": "Codes d'erreurs",
+  "description": "Table de valeur (code/label) pour les codes d'erreurs - Référentiel Crédit Logement (interne)",
+  "documentationUrl": "https://example.com/docs/normes/CL_CODE_ERREURS",
+  "version_schema": "v0.0.1",
+  "langue": "fr",
+  "note": "⚠️ Cette table doit être complétée avec l'ensemble des codes d'erreurs",
+  "values": [
+    {
+      "code": "ORGA-RG04",
+      "label": "Le prêteur et le destinataire de la LA doivent être compatibles"
+    }
+  ]
+}

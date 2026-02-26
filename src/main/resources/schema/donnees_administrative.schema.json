@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "donnees_administrative.schema.json",
+  "title": "Données administratives (placeholder)",
+  "description": "Schéma externe placeholder pour données administratives. À compléter selon les besoins.",
+  "schemaVersion": "1.00.00-SNAPSHOT",
+  "type": "object",
+  "additionalProperties": true,
+  "$comment": "Schema placeholder créé automatiquement le 2026-02-04"
+}

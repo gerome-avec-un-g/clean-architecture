@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "items/owner.schema.json",
+  "title": "owner (Open Banking account Item)",
+  "schemaVersion": "1.0.0",
+  "description": "Structure d'un détenteur de compte bancaire agrégé issu de l'open banking, utilisé pour enrichir les dossiers de demande de garantie.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "ownerId": { "type": "string" },
+    "name": { "type": "string" },
+    "firstName": { "type": "string" },
+    "lastName": { "type": "string" },
+    "legalType": { "type": "string", "enum": ["PERSON", "ORGANISATION"] },
+    "dateAndPlaceOfBirth": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "birthDate": { "type": "string", "format": "date" },
+        "cityOfBirth": { "type": "string" },
+        "countryOfBirth": { "type": "string", "pattern": "^[A-Z]{2}$" }
+      }
+    },
+    "address": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "streetName": { "type": "string" },
+        "postCode": { "type": "string" },
+        "townName": { "type": "string" },
+        "country": { "type": "string", "pattern": "^[A-Z]{2}$" }
+      }
+    },
+    "contact": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "email": { "type": "string", "format": "email" },
+        "phone": { "type": "string" }
+      }
+    }
+  },
+  "required": ["ownerId", "name"]
+}

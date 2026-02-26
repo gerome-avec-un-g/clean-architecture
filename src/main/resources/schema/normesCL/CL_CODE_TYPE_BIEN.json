@@ -1,0 +1,41 @@
+{
+  "titre": "Type de bien",
+  "description": "Table de valeur (code/label) pour le type de bien",
+  "documentationUrl": "https://example.com/docs/normes/CL_TYPE_BIEN.json",
+  "version_schema": "v0.0.1",
+  "langue": "fr",
+  "values": [
+    {
+      "code": "APT",
+      "label": "Appartement"
+    },
+    {
+      "code": "APS",
+      "label": "Appartements"
+    },
+    {
+      "code": "COM",
+      "label": "Local commercial"
+    },
+    {
+      "code": "GAR",
+      "label": "Garage"
+    },
+    {
+      "code": "MAI",
+      "label": "Maison"
+    },
+    {
+      "code": "MIX",
+      "label": "Bien mixte"
+    },
+    {
+      "code": "SCP",
+      "label": "Parts de scpi"
+    },
+    {
+      "code": "TER",
+      "label": "Terrain seul"
+    }
+  ]
+}

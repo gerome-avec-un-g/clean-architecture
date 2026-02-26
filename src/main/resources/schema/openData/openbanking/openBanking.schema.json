@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "openBanking.schema.json",
+  "title": "Open Banking Data (Aggregated/Internal)",
+  "schemaVersion": "1.0.0",
+  "description": "Schéma JSON décrivant la structure des données bancaires agrégées issues de l'open banking, utilisées pour enrichir les dossiers de demande de garantie.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "owner": { "$ref": "items/owner.schema.json"},
+    "accounts": {
+      "type": "array",
+      "items": { "$ref": "account.schema.json"}
+    }
+  },
+  "required": ["accounts"]
+}

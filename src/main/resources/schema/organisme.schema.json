@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "organisme.schema.json",
+  "title": "Organisme",
+  "description": "Structure d'un organisme (prêteur ou présentateur)",
+  "schemaVersion": "1.00.00-SNAPSHOT",
+  "type": "object",
+  "required": [
+    "type"
+  ],
+  "properties": {
+    "codeBanque": {
+      "type": "number",
+      "description": "Code banque de l'organisme",
+      "minimum": 1,
+      "maximum": 99999
+    },
+    "codeSigle": {
+      "type": "string",
+      "description": "Code sigle de l'organisme",
+      "minLength": 1,
+      "maxLength": 5
+    },
+    "codeGuichetBdf": {
+      "type": "number",
+      "description": "Code guichet de l'organisme",
+      "minimum": 1,
+      "maximum": 99999
+    },
+    "codeEtablissement": {
+      "type": "number",
+      "description": "Code établissement de l'organisme",
+      "minimum": 1,
+      "maximum": 99999
+    },
+    "identifiantCreditLogement": {
+      "type": "string",
+      "description": "Identifiant Crédit Logement (8 chiffres, peut commencer par 0)",
+      "pattern": "^[0-9]{8}$",
+      "minLength": 8,
+      "maxLength": 8
+    },
+    "type": {
+      "type": "string",
+      "enum": ["preteur", "presentateur"],
+      "description": "Type d'organisme :preteur ou destinataire de la lettre d'accord (présentateur)"
+    }
+  },
+  "additionalProperties": false,
+  "oneOf": [
+    {
+      "required": ["identifiantCreditLogement"]
+    },
+    {
+      "allOf": [
+        {
+          "anyOf": [
+            { "required": ["codeBanque"] },
+            { "required": ["codeSigle"] }
+          ]
+        },
+        {
+          "anyOf": [
+            { "required": ["codeGuichetBdf"] },
+            { "required": ["codeEtablissement"] }
+          ]
+        }
+      ]
+    }
+  ],
+  "examples": [
+    {      
+      "identifiantCreditLogement": "06750012",
+      "type": "preteur"
+    },
+    {
+      "codeBanque": 30000,
+      "codeGuichetBdf": 6789,
+      "type": "presentateur"
+    },
+    {
+      "codeSigle": "SIG",
+      "codeEtablissement": 5678,
+      "type": "preteur"
+    }
+  ]
+}

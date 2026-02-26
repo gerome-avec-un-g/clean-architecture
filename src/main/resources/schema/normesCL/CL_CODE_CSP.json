@@ -1,0 +1,73 @@
+{
+  "titre": "Catégories socio-professionnelles (CL)",
+  "description": "Table de valeur (code/label) pour les catégories socio-professionnelles (CL)",
+  "documentationUrl": "https://example.com/docs/normes/CL_CSP.json",
+  "version_schema": "v0.0.1",
+  "langue": "fr",
+  "values": [
+    {
+      "code": "PEO",
+      "label": "Employe du secteur prive"
+    },
+    {
+      "code": "PAM",
+      "label": "Agent de maitrise du secteur prive"
+    },
+    {
+      "code": "FEO",
+      "label": "Employe et agent de maitrise du secteur public"
+    },
+    {
+      "code": "PCA",
+      "label": "Cadre du secteur prive"
+    },
+    {
+      "code": "FCA",
+      "label": "Cadre du secteur public"
+    },
+    {
+      "code": "LDS",
+      "label": "Dirigeant de société"
+    },
+    {
+      "code": "LAC",
+      "label": "Artisan, commercant"
+    },
+    {
+      "code": "LAG",
+      "label": "Agriculteur"
+    },
+    {
+      "code": "LPL",
+      "label": "Profession liberale"
+    },
+    {
+      "code": "LPM",
+      "label": "Profession liberale medicale"
+    },
+    {
+      "code": "LZZ",
+      "label": "Profession independante (spectacle, sport)"
+    },
+    {
+      "code": "IRE",
+      "label": "Retraite"
+    },
+    {
+      "code": "PIN",
+      "label": "Interimaire"
+    },
+    {
+      "code": "ICH",
+      "label": "Chomeur"
+    },
+    {
+      "code": "IET",
+      "label": "Etudiant"
+    },
+    {
+      "code": "ISA",
+      "label": "Sans profession"
+    }
+  ]
+}

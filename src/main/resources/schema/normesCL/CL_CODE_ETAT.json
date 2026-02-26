@@ -1,0 +1,33 @@
+{
+  "titre": "État",
+  "description": "Table de valeur (code/label) pour l'état",
+  "documentationUrl": "https://example.com/docs/normes/CL_ETAT.json",
+  "version_schema": "v0.0.1",
+  "langue": "fr",
+  "values": [
+    {
+      "code": "RE",
+      "label": "Refus"
+    },
+    {
+      "code": "OK",
+      "label": "Accord"
+    },
+    {
+      "code": "ET",
+      "label": "A l'etude"
+    },
+    {
+      "code": "AN",
+      "label": "Annulation"
+    },
+    {
+      "code": "TE",
+      "label": "Termine"
+    },
+    {
+      "code": "CT",
+      "label": "Contentieux (ou a l'etude contentieuse)"
+    }
+  ]
+}

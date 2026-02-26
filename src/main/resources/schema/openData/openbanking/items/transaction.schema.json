@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "items/transaction.schema.json",
+  "title": "transaction",
+  "schemaVersion": "1.0.0",
+  "description": "Structure d'une transaction d'un compte bancaire agrégée issue de l'open banking, utilisée pour enrichir les dossiers de demande de garantie.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "transactionId": { "type": "string", "minLength": 1 },
+    "status": { "type": "string", "enum": ["booked","pending","rejected"] },
+    "bookingDate": { "type": "string", "format": "date" },
+    "valueDate": { "type": "string", "format": "date" },
+    "amount": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "currency": {
+          "type": "string",
+          "pattern": "^[A-Z]{3}$"
+        }, 
+        "value": {
+          "type": "string",
+          "pattern": "^-?[0-9]+(\\.[0-9]{1,2})?$",
+          "description": "Montant monétaire en unités principales (par exemple, euros), représenté comme une chaîne décimale avec au maximum deux décimales. Exemple : \"123.45\"."
+        }
+      },
+      "required": ["currency","value"]
+    },
+    "creditDebitIndicator": { "type": "string", "enum": ["credit","debit"] },
+    "counterpartyName": { "type": "string" },
+    "remittanceInformation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "unstructured": { "type": "string" },
+        "structured": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "reference": { "type": "string" },
+            "creditorName": { "type": "string" }
+          }
+        }
+      }
+    }
+  },
+  "required": ["transactionId","status","bookingDate","amount","creditDebitIndicator"]
+}

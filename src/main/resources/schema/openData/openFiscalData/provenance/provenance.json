@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "provenance/provenance.json",
+  "title": "Provenance",
+  "schemaVersion": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "sourceSystem": {
+      "type": "string"
+    },
+    "retrievedAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "statementId": {
+      "type": "string"
+    },
+    "hash": {
+      "type": "string"
+    }
+  }
+}

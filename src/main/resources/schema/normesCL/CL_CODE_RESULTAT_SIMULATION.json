@@ -1,0 +1,17 @@
+{
+  "titre": "Résultat de simulation",
+  "description": "Table de valeur (code/label) pour le résultat de simulation",
+  "documentationUrl": "https://example.com/docs/normes/CL_RESULTAT_SIMULATION.json",
+  "version_schema": "v0.0.1",
+  "langue": "fr",
+  "values": [
+    {
+      "code": "OK",
+      "label": "Accord automatique"
+    },
+    {
+      "code": "ET",
+      "label": "Necessite une etude complementaire"
+    }
+  ]
+}

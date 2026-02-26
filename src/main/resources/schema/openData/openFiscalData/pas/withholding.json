@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "pas/withholding.json",
+  "title": "PASWithholding",
+  "schemaVersion": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "date",
+    "mode",
+    "rate",
+    "amount",
+    "currency"
+  ],
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "RETENUE_A_LA_SOURCE",
+        "ACOMPTE"
+      ]
+    },
+    "rate": {
+      "type": "number",
+      "minimum": 0
+    },
+    "amount": {
+      "type": "number",
+      "format": "double"
+    },
+    "currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "payer": {
+      "$ref": "../../common/entity-ref.json"
+    },
+    "reference": {
+      "type": "string"
+    },
+    "relatedIncomeRef": {
+      "type": "string"
+    }
+  }
+}

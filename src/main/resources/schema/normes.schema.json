@@ -1,0 +1,615 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "normes.schema.json",
+  "title": "Référentiel des normes",
+  "schemaVersion": "1.00.00-SNAPSHOT",
+  "description": "Définitions centrales des normes internes (CL) et externes utilisées dans les schémas (code, libellé, URL de documentation).",
+  "$defs": {
+    "NormeDefinition": {
+      "type": "object",
+      "required": ["code", "label", "documentationUrl"],
+      "properties": {
+        "code": { "type": "string", "minLength": 1 },
+        "label": { "type": "string", "minLength": 1 },
+        "documentationUrl": { "type": "string", "format": "uri" }
+      },
+      "additionalProperties": false,
+      "description": "Définition détaillée d'une norme (code, libellé, url de documentation)."
+    },
+    "ISO_3166_1_ALPHA_2": {
+      "allOf": [
+        { "$ref": "#/$defs/NormeDefinition" },
+        {
+          "properties": {
+            "code": { "const": "ISO_3166_1_ALPHA_2" },
+            "label": { "const": "Code ISO Pays sur 2 lettres definies dans la norme ISO 3166" },
+            "documentationUrl": { "const": "https://www.iso.org/iso-3166-country-codes.html" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "ISO_3166_1_ALPHA_3": {
+      "allOf": [
+        { "$ref": "#/$defs/NormeDefinition" },
+        {
+          "properties": {
+            "code": { "const": "ISO_3166_1_ALPHA_3" },
+            "label": { "const": "Code ISO Pays sur 3 lettres definies dans la norme ISO 3166" },
+            "documentationUrl": { "const": "https://www.iso.org/iso-3166-country-codes.html" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "PCS_INSEE_2020": {
+      "allOf": [
+        { "$ref": "#/$defs/NormeDefinition" },
+        {
+          "properties": {
+            "code": { "const": "PCS_INSEE_2020" },
+            "label": { "const": "Nomenclature des professions et catégories socioprofessionnelles INSEE 2020" },
+            "documentationUrl": { "const": "https://www.insee.fr/fr/information/2497952" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "CL_CODE_CSP": {
+      "allOf": [
+        { "$ref": "#/$defs/NormeDefinition" },
+        {
+          "properties": {
+            "code": { "const": "CL_CODE_CSP" },
+            "label": { "const": "Table des code Catégories Socio Professionnelles - Référentiel Crédit Logement (interne)" },
+            "documentationUrl": { "const": "https://example.com/docs/normes/CL_CODE_CSP" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "CL_CODE_TYPE_CHARGE": {
+      "allOf": [
+        { "$ref": "#/$defs/NormeDefinition" },
+        {
+          "properties": {
+            "code": { "const": "CL_CODE_TYPE_CHARGE" },
+            "label": { "const": "Table des types de charge - Référentiel Crédit Logement (interne)" },
+            "documentationUrl": { "const": "https://example.com/docs/normes/CL_CODE_TYPE_CHARGE" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "CL_CODE_TYPE_REVENU": {
+      "allOf": [
+        { "$ref": "#/$defs/NormeDefinition" },
+        {
+          "properties": {
+            "code": { "const": "CL_CODE_TYPE_REVENU" },
+            "label": { "const": "Table des types de revenu - Référentiel Crédit Logement (interne)" },
+            "documentationUrl": { "const": "https://example.com/docs/normes/CL_CODE_TYPE_REVENU" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+  "CL_CODE_TYPE_TAUX": {
+      "allOf": [
+        { "$ref": "#/$defs/NormeDefinition" },
+        {
+          "properties": {
+            "code": { "const": "CL_CODE_TYPE_TAUX" },
+            "label": { "const": "Table des types de taux - Référentiel Crédit Logement (interne)" },
+            "documentationUrl": { "const": "https://example.com/docs/normes/CL_CODE_TYPE_TAUX" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    
+    "CL_CODE_MODE_REMBOURSEMENT": {
+      "allOf": [
+        { "$ref": "#/$defs/NormeDefinition" },
+        {
+          "properties": {
+            "code": { "const": "CL_CODE_MODE_REMBOURSEMENT" },
+            "label": { "const": "Table des modes de remboursement - Référentiel Crédit Logement (interne)" },
+            "documentationUrl": { "const": "https://example.com/docs/normes/CL_CODE_MODE_REMBOURSEMENT" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "CL_CODE_TYPE_POSTE_COUT": {
+      "allOf": [  
+        { "$ref": "#/$defs/NormeDefinition" },
+        {
+          "properties": {
+            "code": { "const": "CL_CODE_TYPE_POSTE_COUT" },
+            "label": { "const": "Table des types de postes de coût - Référentiel Crédit Logement (interne)" },
+            "documentationUrl": { "const": "https://example.com/docs/normes/CL_CODE_TYPE_POSTE_COUT" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "CL_CODE_TYPE_GARANTIE": {
+      "allOf": [
+        { "$ref": "#/$defs/NormeDefinition" },
+        {
+          "properties": {
+            "code": { "const": "CL_TYPE_GARANTIE" },
+            "label": { "const": "Table des garanties - Référentiel Crédit Logement (interne)" },
+            "documentationUrl": { "const": "https://example.com/docs/normes/CL_CODE_TYPE_GARANTIE" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "CL_CODE_TYPE_BIEN": {
+      "allOf": [
+        { "$ref": "#/$defs/NormeDefinition" },
+        {
+          "properties": {
+            "code": { "const": "CL_CODE_TYPE_BIEN" },
+            "label": { "const": "Table des types de bien - Référentiel Crédit Logement (interne)" },
+            "documentationUrl": { "const": "https://example.com/docs/normes/CL_CODE_TYPE_BIEN" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "CL_CODE_TYPE_ASSURANCE": {
+      "allOf": [
+        { "$ref": "#/$defs/NormeDefinition" },
+        {
+          "properties": {
+            "code": { "const": "CL_CODE_TYPE_ASSURANCE" },
+            "label": { "const": "Table des types d'assurance - Référentiel Crédit Logement (interne)" },
+            "documentationUrl": { "const": "https://example.com/docs/normes/CL_CODE_TYPE_ASSURANCE" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "CL_CODE_BAREME_TARIFICATION": {
+      "allOf": [
+        { "$ref": "#/$defs/NormeDefinition" },
+        {
+          "properties": {
+            "code": { "const": "CL_CODE_BAREME_TARIFICATION" },
+            "label": { "const": "Table des barèmes de tarification - Référentiel Crédit Logement (interne)" },
+            "documentationUrl": { "const": "https://example.com/docs/normes/CL_CODE_BAREME_TARIFICATION" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "CL_CODE_ERREURS": {
+      "allOf": [
+        { "$ref": "#/$defs/NormeDefinition" },
+        {
+          "properties": {
+            "code": { "const": "CL_CODE_ERREURS" },
+            "label": { "const": "Table des codes d'erreurs - Référentiel Crédit Logement (interne)" },
+            "documentationUrl": { "const": "https://example.com/docs/normes/CL_CODE_ERREURS" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "CL_CODE_TYPE_SITUATION_FAMILLE": {
+      "allOf": [
+        { "$ref": "#/$defs/NormeDefinition" },
+        {
+          "properties": {
+            "code": { "const": "CL_CODE_TYPE_SITUATION_FAMILLE" },
+            "label": { "const": "Table des situations familiales - Référentiel Crédit Logement (interne)" },
+            "documentationUrl": { "const": "https://example.com/docs/normes/CL_CODE_TYPE_SITUATION_FAMILLE" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+  "CL_CODE_SEXE": {
+      "allOf": [
+        { "$ref": "#/$defs/NormeDefinition" },
+        {
+          "properties": {
+      "code": { "const": "CL_CODE_SEXE" },
+      "label": { "const": "Table des codes Sexe - Référentiel Crédit Logement (interne)" },
+      "documentationUrl": { "const": "https://example.com/docs/normes/CL_CODE_SEXE" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "CL_CODE_RESULTAT_SIMULATION": {
+      "allOf": [
+        { "$ref": "#/$defs/NormeDefinition" },
+        {
+          "properties": {
+            "code": { "const": "CL_CODE_RESULTAT_SIMULATION" },
+            "label": { "const": "Table des résultats de simulation - Référentiel Crédit Logement (interne)" },
+            "documentationUrl": { "const": "https://example.com/docs/normes/CL_CODE_RESULTAT_SIMULATION" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "CL_CODE_PERIODICITE": {
+      "allOf": [
+        { "$ref": "#/$defs/NormeDefinition" },
+        {
+          "properties": {
+            "code": { "const": "CL_CODE_PERIODICITE" },
+            "label": { "const": "Table des codes périodicité - Référentiel Crédit Logement (interne)" },
+            "documentationUrl": { "const": "https://example.com/docs/normes/CL_CODE_PERIODICITE" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+  "CL_CODE_QUALITE_INTERVENANT": {
+      "allOf": [
+        { "$ref": "#/$defs/NormeDefinition" },
+        {
+          "properties": {
+      "code": { "const": "CL_CODE_QUALITE_INTERVENANT" },
+      "label": { "const": "Table des qualités d'intervention - Référentiel Crédit Logement (interne)" },
+      "documentationUrl": { "const": "https://example.com/docs/normes/CL_CODE_QUALITE_INTERVENANT" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "CL_CODE_NATURE_OPERATION": {
+      "allOf": [
+        { "$ref": "#/$defs/NormeDefinition" },
+        {
+          "properties": {
+            "code": { "const": "CL_CODE_NATURE_OPERATION" },
+            "label": { "const": "Table des natures d'opération - Référentiel Crédit Logement (interne)" },
+            "documentationUrl": { "const": "https://example.com/docs/normes/CL_CODE_NATURE_OPERATION" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "CL_CODE_NATURE_PRET": {
+      "allOf": [
+        { "$ref": "#/$defs/NormeDefinition" },
+        {
+          "properties": {
+            "code": { "const": "CL_CODE_NATURE_PRET" },
+            "label": { "const": "Table des natures de prêt - Référentiel Crédit Logement (interne)" },
+            "documentationUrl": { "const": "https://example.com/docs/normes/CL_CODE_NATURE_PRET" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "CL_CODE_ETAT": {
+      "allOf": [
+        { "$ref": "#/$defs/NormeDefinition" },
+        {
+          "properties": {
+            "code": { "const": "CL_CODE_ETAT" },
+            "label": { "const": "Table des codes État - Référentiel Crédit Logement (interne)" },
+            "documentationUrl": { "const": "https://example.com/docs/normes/CL_CODE_ETAT" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "CL_CODE_DEVISE": {
+      "allOf": [
+        { "$ref": "#/$defs/NormeDefinition" },
+        {
+          "properties": {
+            "code": { "const": "CL_CODE_DEVISE" },
+            "label": { "const": "Table des codes devise gérés par Crédit Logement - Référentiel Crédit Logement (interne)" },
+            "documentationUrl": { "const": "https://example.com/docs/normes/CL_CODE_DEVISE" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "CL_CODE_DESTINATION_BIEN": {
+      "allOf": [
+        { "$ref": "#/$defs/NormeDefinition" },
+        {
+          "properties": {
+            "code": { "const": "CL_CODE_DESTINATION_BIEN" },
+            "label": { "const": "Table des destination du bien - Référentiel Crédit Logement (interne)" },
+            "documentationUrl": { "const": "https://example.com/docs/normes/CL_CODE_DESTINATION_BIEN" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "CL_CODE_TYPE_CONTRAT_TRAVAIL": {
+      "allOf": [
+        { "$ref": "#/$defs/NormeDefinition" },
+        {
+          "properties": {
+            "code": { "const": "CL_CODE_TYPE_CONTRAT_TRAVAIL" },
+            "label": { "const": "Table des types de contrat de travail - Référentiel Crédit Logement (interne)" },
+            "documentationUrl": { "const": "https://example.com/docs/normes/CL_CODE_TYPE_CONTRAT_TRAVAIL" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "CL_CODE_TYPE_RESIDENCE_PRINCIPALE": {
+      "allOf": [
+        { "$ref": "#/$defs/NormeDefinition" },
+        {
+          "properties": {
+            "code": { "const": "CL_CODE_TYPE_RESIDENCE_PRINCIPALE" },
+            "label": { "const": "Table des types de résidence principale - Référentiel Crédit Logement (interne)" },
+            "documentationUrl": { "const": "https://example.com/docs/normes/CL_CODE_TYPE_RESIDENCE_PRINCIPALE" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "CL_CODE_TYPE_TRAVAUX": {
+      "allOf": [
+        { "$ref": "#/$defs/NormeDefinition" },
+        {
+          "properties": {
+            "code": { "const": "CL_CODE_TYPE_TRAVAUX" },
+            "label": { "const": "Table des types de travaux - Référentiel Crédit Logement (interne)" },
+            "documentationUrl": { "const": "https://example.com/docs/normes/CL_CODE_TYPE_TRAVAUX" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "CL_CODE_MOTIF_REFUS": {
+      "allOf": [
+        { "$ref": "#/$defs/NormeDefinition" },
+        {
+          "properties": {
+            "code": { "const": "CL_CODE_MOTIF_REFUS" },
+            "label": { "const": "Table des motifs de refus - Référentiel Crédit Logement (interne)" },
+            "documentationUrl": { "const": "https://example.com/docs/normes/CL_CODE_MOTIF_REFUS" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "CL_CODE_CLASSEMENT_DPE_GES": {
+      "allOf": [
+        { "$ref": "#/$defs/NormeDefinition" },
+        {
+          "properties": {
+            "code": { "const": "CL_CODE_CLASSEMENT_DPE_GES" },
+            "label": { "const": "Table des classements DPE/GES - Référentiel Crédit Logement (interne)" },
+            "documentationUrl": { "const": "https://example.com/docs/normes/CL_CODE_CLASSEMENT_DPE_GES" }
+          },
+          "additionalProperties": false
+        }
+      ]
+
+    },
+    "CL_CODE_TYPE_PERSONNE_MORALE": {
+      "allOf": [
+        { "$ref": "#/$defs/NormeDefinition" },
+        {
+          "properties": {
+            "code": { "const": "CL_CODE_TYPE_PERSONNE_MORALE" },
+            "label": { "const": "Table des types de personne morale - Référentiel Crédit Logement (interne)" },
+            "documentationUrl": { "const": "https://example.com/docs/normes/CL_CODE_TYPE_PERSONNE_MORALE" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "CL_CODE_NATURE_PROPRIETE": {
+      "allOf": [
+        { "$ref": "#/$defs/NormeDefinition" },
+        {
+          "properties": {
+            "code": { "const": "CL_CODE_NATURE_PROPRIETE" },
+            "label": { "const": "Nomenclature des natures de propriété - Référentiel Crédit Logement (interne)" },
+            "documentationUrl": { "const": "https://example.com/docs/normes/CL_CODE_NATURE_PROPRIETE" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "normesCodePays": {
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": ["ISO_3166_1_ALPHA_2", "ISO_3166_1_ALPHA_3"],
+          "description": "Référence (clé) possible vers une norme de code pays définie dans ce fichier."
+        },
+        { "$ref": "#/$defs/ISO_3166_1_ALPHA_2" },
+        { "$ref": "#/$defs/ISO_3166_1_ALPHA_3" }
+      ],
+      "description": "Schéma regroupant les normes de codes pays autorisées."
+    },
+    "normesCodeCsp": {
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": ["PCS_INSEE_2020", "CL_CODE_CSP"],
+          "description": "Référence (clé) possible vers une norme CSP définie dans ce fichier."
+        },
+        { "$ref": "#/$defs/CL_CODE_CSP" },
+        { "$ref": "#/$defs/PCS_INSEE_2020" }
+      ],
+      "description": "Schéma regroupant les normes de catégories socio-professionnelles autorisées."
+    },
+    "normesCodeClassementDpeGes": {
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": ["CL_CODE_CLASSEMENT_DPE_GES"]
+        },
+        { "$ref": "#/$defs/CL_CODE_CLASSEMENT_DPE_GES" }
+      ]
+     },
+    "normesCodeTypeCharge": {
+      "oneOf": [
+        { "type": "string", "enum": ["CL_CODE_TYPE_CHARGE" ] },
+        { "$ref": "#/$defs/CL_CODE_TYPE_CHARGE" }
+      ]
+    },
+    "normesCodeTypeRevenu": {
+      "oneOf": [
+        { "type": "string", "enum": ["CL_CODE_TYPE_REVENU"] },
+        { "$ref": "#/$defs/CL_CODE_TYPE_REVENU" }
+      ]
+    },
+    "normesCodeTypeTaux": {
+      "oneOf": [
+        { "type": "string", "enum": ["CL_CODE_TYPE_TAUX"] },
+        { "$ref": "#/$defs/CL_CODE_TYPE_TAUX" }
+      ]
+    },
+    "normesCodeModeRemboursement": {
+      "oneOf": [
+        { "type": "string", "enum": ["CL_CODE_MODE_REMBOURSEMENT"] },
+        { "$ref": "#/$defs/CL_CODE_MODE_REMBOURSEMENT" }
+      ]
+    },
+    "normesCodeTypePosteCout": {
+      "oneOf": [
+        { "type": "string", "enum": ["CL_CODE_TYPE_POSTE_COUT"] },
+        { "$ref": "#/$defs/CL_CODE_TYPE_POSTE_COUT" }
+      ]
+    },
+    "normesCodeTypeGarantie": {
+      "oneOf": [
+        { "type": "string", "enum": ["CL_CODE_TYPE_GARANTIE"] },
+        { "$ref": "#/$defs/CL_CODE_TYPE_GARANTIE" }
+      ]
+    },
+    "normesCodeTypeBien": {
+      "oneOf": [
+        { "type": "string", "enum": ["CL_CODE_TYPE_BIEN"] },
+        { "$ref": "#/$defs/CL_CODE_TYPE_BIEN" }
+      ]
+    },
+    "normesCodeBaremeTarification": {
+      "oneOf": [
+        { "type": "string", "enum": ["CL_CODE_BAREME_TARIFICATION"] },
+        { "$ref": "#/$defs/CL_CODE_BAREME_TARIFICATION" }
+      ]
+    },
+    "normesCodeErreurs": {
+      "oneOf": [
+        { "type": "string", "enum": ["CL_CODE_ERREURS"] },
+        { "$ref": "#/$defs/CL_CODE_ERREURS" }
+      ]
+    },
+    "normesCodeTypeAssurance": {
+      "oneOf": [
+        { "type": "string", "enum": ["CL_CODE_TYPE_ASSURANCE"] },
+        { "$ref": "#/$defs/CL_CODE_TYPE_ASSURANCE" }
+      ]
+    },
+    "normesCodeSituationFamille": {
+      "oneOf": [
+        { "type": "string", "enum": ["CL_CODE_TYPE_SITUATION_FAMILLE"] },
+        { "$ref": "#/$defs/CL_CODE_TYPE_SITUATION_FAMILLE" }
+      ]
+    },
+    "normesCodeSexe": {
+      "oneOf": [
+        { "type": "string", "enum": ["CL_CODE_SEXE"] },
+        { "$ref": "#/$defs/CL_CODE_SEXE" }
+      ],
+      "description": "Schéma regroupant la nomenclature sur le code sexe."
+    },
+    "normesCodeResultatSimulation": {
+      "oneOf": [
+        { "type": "string", "enum": ["CL_CODE_RESULTAT_SIMULATION"] },
+        { "$ref": "#/$defs/CL_CODE_RESULTAT_SIMULATION" }
+      ]
+    },
+    "normesCodePeriodicite": {
+      "oneOf": [
+        { "type": "string", "enum": ["CL_CODE_PERIODICITE"] },
+        { "$ref": "#/$defs/CL_CODE_PERIODICITE" }
+      ]
+    },
+    "normesCodeQualiteIntervenant": {
+      "oneOf": [
+        { "type": "string", "enum": ["CL_CODE_QUALITE_INTERVENANT"] },
+        { "$ref": "#/$defs/CL_CODE_QUALITE_INTERVENANT" }
+      ]
+    },
+    "normesCodeNatureOperation": {
+      "oneOf": [
+        { "type": "string", "enum": ["CL_CODE_NATURE_OPERATION"] },
+        { "$ref": "#/$defs/CL_CODE_NATURE_OPERATION" }
+      ]
+    },
+    "normesCodeNaturePret": {
+      "oneOf": [
+        { "type": "string", "enum": ["CL_CODE_NATURE_PRET"] },
+        { "$ref": "#/$defs/CL_CODE_NATURE_PRET" }
+      ]
+    },
+    "normesCodeEtat": {
+      "oneOf": [
+        { "type": "string", "enum": ["CL_CODE_ETAT"] },
+        { "$ref": "#/$defs/CL_CODE_ETAT" }
+      ]
+    },
+    "normesCodeDevise": {
+      "oneOf": [
+        { "type": "string", "enum": ["CL_CODE_DEVISE"] },
+        { "$ref": "#/$defs/CL_CODE_DEVISE" }
+      ]
+    },
+    "normesCodeDestinationBien": {
+      "oneOf": [
+        { "type": "string", "enum": ["CL_CODE_DESTINATION_BIEN"] },
+        { "$ref": "#/$defs/CL_CODE_DESTINATION_BIEN" }
+      ]
+    },
+    "normesCodeTypeContratTravail": {
+      "oneOf": [
+        { "type": "string", "enum": ["CL_CODE_TYPE_CONTRAT_TRAVAIL"] },
+        { "$ref": "#/$defs/CL_CODE_TYPE_CONTRAT_TRAVAIL" }
+      ]
+    },
+    "normesCodeTypeResidencePrincipale": {
+      "oneOf": [
+        { "type": "string", "enum": ["CL_CODE_TYPE_RESIDENCE_PRINCIPALE"] },
+        { "$ref": "#/$defs/CL_CODE_TYPE_RESIDENCE_PRINCIPALE" }
+      ]
+    },
+    "normesCodeTypeTravaux": {
+      "oneOf": [
+        { "type": "string", "enum": ["CL_CODE_TYPE_TRAVAUX"] },
+        { "$ref": "#/$defs/CL_CODE_TYPE_TRAVAUX" }
+      ]
+    },
+    "normesCodeMotifRefus": {
+      "oneOf": [
+        { "type": "string", "enum": ["CL_CODE_MOTIF_REFUS"] },
+        { "$ref": "#/$defs/CL_CODE_MOTIF_REFUS" }
+      ]
+    },
+    "normesCodeTypePersonneMorale": {
+      "oneOf": [
+        { "type": "string", "enum": ["CL_CODE_TYPE_PERSONNE_MORALE"] },
+        { "$ref": "#/$defs/CL_CODE_TYPE_PERSONNE_MORALE" }
+      ]
+    },
+    "normesCodeNaturePropriete": {
+      "oneOf": [
+        { "type": "string", "enum": ["CL_CODE_NATURE_PROPRIETE"] },
+        { "$ref": "#/$defs/CL_CODE_NATURE_PROPRIETE" }
+      ]
+    }    
+  }
+}

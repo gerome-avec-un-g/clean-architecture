@@ -1,0 +1,33 @@
+{
+  "titre": "Type d'assurance",
+  "description": "Table de valeur (code/label) pour le type d'assurance",
+  "documentationUrl": "https://example.com/docs/normes/CL_TYPE_ASSURANCE.json",
+  "version_schema": "v0.0.1",
+  "langue": "fr",
+  "values": [
+    {
+      "code": "DEC",
+      "label": "Assurance groupe deces seul"
+    },
+    {
+      "code": "DIT",
+      "label": "Assurance groupe deces, invalidite, incapacite de travail"
+    },
+    {
+      "code": "GPA",
+      "label": "Assurance groupe garantie personne agee"
+    },
+    {
+      "code": "NON",
+      "label": "Absence d'assurance"
+    },
+    {
+      "code": "PIT",
+      "label": "Delegation assurance deces, invalidite, incapacite travail"
+    },
+    {
+      "code": "POL",
+      "label": "Delegation assurance deces"
+    }
+  ]
+}
